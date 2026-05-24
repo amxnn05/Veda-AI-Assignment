@@ -6,10 +6,12 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { useSocketStore } from '@/store/socketStore';
 import styles from './MainLayout.module.css';
+import { clsx } from 'clsx';
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { connect, disconnect } = useSocketStore();
   const pathname = usePathname();
+  const useCompactSidebar = false;
 
   useEffect(() => {
     connect();
@@ -18,9 +20,9 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={styles.container}>
-      <Sidebar />
-      <div className={styles.mainContent}>
-        <Header />
+      <Sidebar compact={useCompactSidebar} />
+      <div className={clsx(styles.mainContent, useCompactSidebar && styles.compactMainContent)}>
+        <Header compactSidebar={useCompactSidebar} />
         <main key={pathname} className={styles.content}>
           {children}
         </main>

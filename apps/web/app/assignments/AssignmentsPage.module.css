@@ -28,8 +28,8 @@
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding-top: 6px;
 }
 
@@ -111,11 +111,12 @@
   position: absolute;
   left: 12px;
   color: var(--text-muted);
+  pointer-events: none;
 }
 
 .searchInput {
   width: 100%;
-  padding: 10px 12px 10px 40px;
+  padding: 10px 42px 10px 40px;
   border: 1px solid var(--border-color);
   border-radius: 24px;
   font-size: 14px;
@@ -135,6 +136,27 @@
   box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.12);
 }
 
+.clearSearchButton {
+  position: absolute;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.clearSearchButton:hover {
+  transform: scale(1.04);
+  background: color-mix(in srgb, var(--foreground) 13%, transparent);
+  color: var(--foreground);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -151,6 +173,62 @@
 .grid > *:nth-child(3) { animation-delay: 160ms; }
 .grid > *:nth-child(4) { animation-delay: 200ms; }
 .grid > *:nth-child(n + 5) { animation-delay: 240ms; }
+
+.noResults {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  text-align: center;
+  animation: elementReveal 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.noResultsIcon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: color-mix(in srgb, #F97316 14%, var(--card-bg));
+  color: #F97316;
+  box-shadow: 0 16px 36px rgba(249, 115, 22, 0.14);
+}
+
+.noResults h2 {
+  margin: 8px 0 0;
+  color: var(--foreground);
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.noResults p {
+  max-width: 420px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.noResults button {
+  margin-top: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--foreground);
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.noResults button:hover {
+  transform: translateY(-1px);
+  background: var(--surface-soft);
+}
 
 .fab {
   position: fixed;

@@ -1,7 +1,23 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding-bottom: 100px;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: fixed;
+  width: 640px;
+  height: 640px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%, -40%);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(249, 115, 22, 0.07) 38%, transparent 68%);
+  filter: blur(38px);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .header {
@@ -35,26 +51,36 @@
 
 .progressBar {
   width: 100%;
+  max-width: 800px;
   height: 4px;
-  background-color: var(--surface-soft);
+  background-color: color-mix(in srgb, var(--surface-soft) 65%, transparent);
   border-radius: 2px;
   margin-bottom: 32px;
+  margin-left: auto;
+  margin-right: auto;
   overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .progressFill {
   height: 100%;
-  background-color: var(--foreground);
+  background: linear-gradient(90deg, var(--foreground), rgba(249, 115, 22, 0.74));
   transition: width 0.3s ease;
 }
 
 .formCard {
-  background-color: var(--card-bg);
-  backdrop-filter: blur(10px);
+  max-width: 800px;
+  margin: 0 auto;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    color-mix(in srgb, var(--card-bg) 82%, transparent);
+  backdrop-filter: blur(24px) saturate(1.08);
   border-radius: 24px;
   padding: 32px;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--border-color) 72%, rgba(255, 255, 255, 0.16));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 28px 80px rgba(0, 0, 0, 0.16);
   animation: pageContentSettle 320ms cubic-bezier(0.22, 1, 0.36, 1) 40ms both;
 }
 
@@ -77,7 +103,7 @@
 }
 
 .uploadBox {
-  border: 2px dashed var(--border-color);
+  border: 1.5px dashed color-mix(in srgb, var(--border-color) 82%, transparent);
   border-radius: 16px;
   padding: 40px;
   display: flex;
@@ -85,7 +111,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--surface-soft);
+  background-color: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  backdrop-filter: blur(10px);
   margin-bottom: 12px;
   cursor: pointer;
   transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
@@ -93,7 +120,7 @@
 
 .uploadBox:hover, .uploadBoxActive {
   border-color: rgba(148, 163, 184, 0.7);
-  background-color: var(--surface-hover);
+  background-color: color-mix(in srgb, var(--surface-hover) 80%, transparent);
 }
 
 .uploadBoxActive {
@@ -128,9 +155,10 @@
 
 .browseButton {
   padding: 8px 16px;
-  background-color: var(--card-bg);
+  background-color: color-mix(in srgb, var(--card-bg) 78%, transparent);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
   color: var(--foreground);
@@ -213,10 +241,11 @@
 .input {
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 78%, transparent);
+  border-radius: 14px;
   font-size: 14px;
-  background-color: var(--surface-soft);
+  background-color: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  backdrop-filter: blur(8px);
   color: var(--foreground);
   transition: all 0.2s;
 }
@@ -275,9 +304,10 @@
   height: 34px;
   padding: 0 10px;
   color: var(--foreground);
-  background-color: var(--card-bg);
+  background-color: color-mix(in srgb, var(--card-bg) 80%, transparent);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -331,10 +361,11 @@
 .select {
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 78%, transparent);
+  border-radius: 999px;
   font-size: 14px;
-  background-color: var(--surface-soft);
+  background-color: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  backdrop-filter: blur(8px);
   color: var(--foreground);
   appearance: none;
   cursor: pointer;
@@ -351,9 +382,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--surface-soft);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  background-color: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--border-color) 78%, transparent);
+  border-radius: 999px;
   padding: 8px 12px;
 }
 
@@ -434,10 +466,11 @@
   width: 100%;
   height: 120px;
   padding: 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid color-mix(in srgb, var(--border-color) 78%, transparent);
   border-radius: 16px;
   font-size: 14px;
-  background-color: var(--surface-soft);
+  background-color: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  backdrop-filter: blur(8px);
   color: var(--foreground);
   resize: none;
   transition: all 0.2s;
@@ -473,55 +506,96 @@
 }
 
 .footerActions {
-  position: fixed;
-  bottom: 0;
-  left: 260px;
-  right: 0;
-  height: 80px;
-  background-color: var(--header-bg);
-  backdrop-filter: var(--blur-sm);
-  border-top: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 800px;
+  margin: 28px auto 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  z-index: 50;
-  animation: pageContentSettle 280ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+  animation: pageContentSettle 280ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 
 .prevButton {
-  display: flex;
+  height: 44px;
+  min-width: 116px;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 0 18px 0 14px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 78%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card-bg) 86%, transparent);
+  backdrop-filter: blur(14px);
   color: var(--foreground);
-  padding: 10px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 750;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.prevButton:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--surface-soft) 88%, transparent);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.11);
 }
 
 .nextButton {
-  display: flex;
+  height: 44px;
+  min-width: 104px;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 0 16px 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2F2D31, #171519);
   color: white;
-  background: linear-gradient(135deg, #252525, #151515);
-  padding: 10px 24px;
-  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 750;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.nextButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.24);
+}
+
+.nextButton svg,
+.prevButton svg {
+  flex: 0 0 auto;
+  stroke-width: 2.4;
 }
 
 .nextButton:disabled {
   cursor: not-allowed;
   opacity: 0.65;
+  transform: none;
+}
+
+.nextButton:disabled span {
+  white-space: nowrap;
+}
+
+.nextButton:disabled {
+  min-width: 218px;
+}
+
+.nextButton:disabled:hover {
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+}
+
+.nextButton:disabled,
+.nextButton:disabled:hover {
+  color: white;
 }
 
 @media (max-width: 768px) {
   .footerActions {
-    left: 0;
-    padding: 0 20px;
+    padding: 0;
+    gap: 12px;
   }
   
   .questionTypesHeader {

@@ -8,17 +8,19 @@ import {
   LayoutGrid
 } from 'lucide-react';
 import styles from './Header.module.css';
+import { clsx } from 'clsx';
 
 interface HeaderProps {
   title?: string;
   showBack?: boolean;
+  compactSidebar?: boolean;
 }
 
-export const Header = ({ title = 'Assignment', showBack = true }: HeaderProps) => {
+export const Header = ({ title = 'Assignment', showBack = true, compactSidebar = false }: HeaderProps) => {
   const router = useRouter();
 
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header, compactSidebar && styles.compactSidebarOffset)}>
       <div className={styles.left}>
         {showBack && (
           <button onClick={() => router.back()} className={styles.backButton}>

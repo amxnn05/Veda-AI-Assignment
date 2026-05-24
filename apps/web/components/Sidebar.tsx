@@ -20,11 +20,16 @@ import { useUserStore } from '@/store/userStore';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
 
-export const Sidebar = () => {
+interface SidebarProps {
+  compact?: boolean;
+}
+
+export const Sidebar = ({ compact = false }: SidebarProps) => {
   const pathname = usePathname();
   const { assignments } = useAssignmentStore();
   const { user } = useUserStore();
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
+  const usesAssignmentPageSidebar = pathname.startsWith('/assignments/');
 
   React.useEffect(() => {
     const savedTheme = window.localStorage.getItem('veda-theme') as 'light' | 'dark' | null;
@@ -52,7 +57,11 @@ export const Sidebar = () => {
   ];
 
   return (
-    <aside className={clsx(styles.sidebar, pathname === '/assignments/create' && styles.compactHeight)}>
+    <aside className={clsx(
+      styles.sidebar,
+      usesAssignmentPageSidebar && styles.compactHeight,
+      compact && styles.compactSidebar
+    )}>
       <div className={styles.top}>
         <div className={styles.logoContainer}>
           <div className={styles.logo}>
@@ -61,7 +70,7 @@ export const Sidebar = () => {
           <span className={styles.logoText}>VedaAI</span>
         </div>
 
-        <Link href="/assignments/create" className={styles.createButton}>
+        <Link href="/assignments/create" className={styles.createButton} title="Create Assignment">
           <Sparkles size={18} />
           <span>Create Assignment</span>
         </Link>
@@ -74,6 +83,7 @@ export const Sidebar = () => {
                 key={item.label} 
                 href={item.href} 
                 className={clsx(styles.navItem, isActive && styles.active)}
+                title={item.label}
               >
                 <item.icon size={20} />
                 <span>{item.label}</span>
@@ -92,7 +102,7 @@ export const Sidebar = () => {
           <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
 
-        <Link href="/settings" className={clsx(styles.navItem, pathname === '/settings' && styles.active)}>
+        <Link href="/settings" className={clsx(styles.navItem, pathname === '/settings' && styles.active)} title="Settings">
           <Settings size={20} />
           <span>Settings</span>
         </Link>

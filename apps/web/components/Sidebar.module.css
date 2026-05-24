@@ -14,12 +14,23 @@
   justify-content: space-between;
   z-index: 1000;
   box-shadow: var(--shadow-soft);
-  transition: height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition:
+    width 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 260ms cubic-bezier(0.22, 1, 0.36, 1);
   overflow: hidden;
 }
 
 .compactHeight {
   height: 756px;
+}
+
+.compactSidebar {
+  width: 88px;
+  padding: 18px 14px;
+  border-radius: 18px;
+  align-items: center;
 }
 
 .top {
@@ -28,10 +39,19 @@
   gap: 24px;
 }
 
+.compactSidebar .top {
+  align-items: center;
+  width: 100%;
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.compactSidebar .logoContainer {
+  justify-content: center;
 }
 
 .logo {
@@ -56,6 +76,15 @@
   font-weight: 800;
   color: var(--foreground);
   letter-spacing: -0.5px;
+  white-space: nowrap;
+  transition: opacity 180ms ease, width 220ms ease, transform 220ms ease;
+}
+
+.compactSidebar .logoText {
+  width: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
 }
 
 .createButton {
@@ -71,6 +100,7 @@
   font-weight: 700;
   transition: all 0.2s;
   margin-top: 8px;
+  white-space: nowrap;
 }
 
 .createButton:hover {
@@ -79,10 +109,27 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.compactSidebar .createButton {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 16px;
+  margin-top: 4px;
+}
+
+.compactSidebar .createButton span {
+  display: none;
+}
+
 .nav {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.compactSidebar .nav {
+  width: 100%;
+  align-items: center;
 }
 
 .navItem {
@@ -95,6 +142,7 @@
   font-size: 14px;
   font-weight: 600;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .navItem:hover {
@@ -107,6 +155,19 @@
   color: var(--foreground);
 }
 
+.compactSidebar .navItem {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  justify-content: center;
+  padding: 0;
+  border-radius: 16px;
+}
+
+.compactSidebar .navItem span:not(.badge) {
+  display: none;
+}
+
 .badge {
   margin-left: auto;
   background-color: #F97316;
@@ -117,10 +178,66 @@
   border-radius: 999px;
 }
 
+.compactSidebar .badge {
+  position: absolute;
+  top: 5px;
+  right: 4px;
+  min-width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  font-size: 9px;
+}
+
 .bottom {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.compactSidebar .bottom {
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border-color);
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.themeToggle:hover {
+  transform: translateY(-1px);
+  background-color: var(--surface-hover);
+}
+
+.themeIcon {
+  display: grid;
+  place-items: center;
+}
+
+.compactSidebar .themeToggle {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+.compactSidebar .themeToggle span:not(.themeIcon) {
+  display: none;
 }
 
 .profileCard {
@@ -131,6 +248,14 @@
   background-color: var(--surface-soft);
   border: 1px solid var(--border-color);
   border-radius: 16px;
+  transition: padding 220ms ease, width 220ms ease;
+}
+
+.compactSidebar .profileCard {
+  width: 52px;
+  height: 52px;
+  justify-content: center;
+  padding: 0;
 }
 
 .avatar {
@@ -139,6 +264,12 @@
   border-radius: 12px;
   overflow: hidden;
   background-color: var(--surface-hover);
+}
+
+.compactSidebar .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
 }
 
 .avatar img {
@@ -150,6 +281,10 @@
 .profileInfo {
   display: flex;
   flex-direction: column;
+}
+
+.compactSidebar .profileInfo {
+  display: none;
 }
 
 .schoolName {
