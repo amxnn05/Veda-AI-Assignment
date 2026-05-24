@@ -122,16 +122,14 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
             <div className={styles.deleteIcon}>
               <Trash2 size={20} />
             </div>
-            <p className={styles.dialogKicker}>Delete assignment</p>
-            <h3>Remove this paper?</h3>
+            <h3>Delete assignment</h3>
             <p className={styles.dialogCopy}>
-              <span className={styles.assignmentName}>{assignment.subject}</span>
-              will be removed from your assignment list. You won&apos;t be able to recover it after deleting.
+              Are you sure you want to delete <span className={styles.assignmentName}>{assignment.subject}</span>? This cannot be undone.
             </p>
 
             <div className={styles.dialogActions}>
               <button className={styles.cancelDeleteBtn} onClick={() => setShowDeleteDialog(false)} disabled={isDeleting}>
-                Keep it
+                Cancel
               </button>
               <button className={styles.confirmDeleteBtn} onClick={confirmDelete} disabled={isDeleting}>
                 {isDeleting ? <Loader2 size={16} className={styles.spinner} /> : <Trash2 size={16} />}
