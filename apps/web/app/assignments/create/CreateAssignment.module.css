@@ -1,0 +1,392 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  background-color: #28A745;
+  border-radius: 50%;
+  margin-top: 8px;
+  box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6C757D;
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background-color: #E9ECEF;
+  border-radius: 2px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #1A1A1A;
+  transition: width 0.3s ease;
+}
+
+.formCard {
+  background-color: white;
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid var(--border-color);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+
+.sectionSubtitle {
+  font-size: 14px;
+  color: #6C757D;
+  margin-bottom: 32px;
+}
+
+.uploadArea {
+  margin-bottom: 32px;
+}
+
+.uploadBox {
+  border: 2px dashed #DEE2E6;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #F8F9FA;
+  margin-bottom: 12px;
+}
+
+.uploadIcon {
+  color: #6C757D;
+  margin-bottom: 8px;
+}
+
+.uploadText {
+  font-size: 16px;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+
+.uploadText span {
+  color: #6C757D;
+}
+
+.uploadHint {
+  font-size: 12px;
+  color: #ADB5BD;
+  margin-bottom: 16px;
+}
+
+.browseButton {
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #DEE2E6;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+}
+
+.uploadFooterText {
+  font-size: 14px;
+  color: #6C757D;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 12px;
+}
+
+.dateInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #DEE2E6;
+  border-radius: 12px;
+  font-size: 14px;
+  background-color: #F8F9FA;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ADB5BD;
+}
+
+.dateIcon {
+  position: absolute;
+  right: 16px;
+  color: #6C757D;
+}
+
+.questionTypesSection {
+  margin-bottom: 24px;
+}
+
+.questionTypesHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 40px;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 0 8px;
+}
+
+.headerLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.questionTypeRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 40px;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #DEE2E6;
+  border-radius: 12px;
+  font-size: 14px;
+  background-color: #F8F9FA;
+  appearance: none;
+  cursor: pointer;
+}
+
+.selectIcon {
+  position: absolute;
+  right: 16px;
+  color: #6C757D;
+  pointer-events: none;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F8F9FA;
+  border: 1px solid #DEE2E6;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.counterBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ADB5BD;
+  transition: color 0.2s;
+}
+
+.counterBtn:hover {
+  color: #1A1A1A;
+}
+
+.counterValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.removeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ADB5BD;
+  transition: color 0.2s;
+}
+
+.removeBtn:hover {
+  color: #FF6B6B;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  padding: 8px 0;
+  margin-top: 8px;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.totals p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6C757D;
+}
+
+.totals span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-left: 8px;
+}
+
+.additionalInfo {
+  margin-top: 32px;
+}
+
+.textareaWrapper {
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  height: 120px;
+  padding: 16px;
+  border: 1px solid #DEE2E6;
+  border-radius: 16px;
+  font-size: 14px;
+  background-color: #F8F9FA;
+  resize: none;
+  transition: all 0.2s;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #ADB5BD;
+}
+
+.micButton {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 32px;
+  height: 32px;
+  background-color: #1A1A1A;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.micButton:hover {
+  background-color: #333;
+}
+
+.footerActions {
+  position: fixed;
+  bottom: 0;
+  left: 260px;
+  right: 0;
+  height: 80px;
+  background-color: white;
+  border-top: 1px solid #E9ECEF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 50;
+}
+
+.prevButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  padding: 10px 20px;
+  border: 1px solid #DEE2E6;
+  border-radius: 24px;
+}
+
+.nextButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: #1A1A1A;
+  padding: 10px 24px;
+  border-radius: 24px;
+}
+
+@media (max-width: 768px) {
+  .footerActions {
+    left: 0;
+    padding: 0 20px;
+  }
+  
+  .questionTypesHeader {
+    display: none;
+  }
+  
+  .questionTypeRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background-color: #F8F9FA;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #DEE2E6;
+  }
+  
+  .removeBtn {
+    justify-content: flex-end;
+  }
+}

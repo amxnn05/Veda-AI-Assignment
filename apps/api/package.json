@@ -1,0 +1,44 @@
+{
+  "name": "api",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "tsx watch src/server.ts",
+    "worker": "tsx watch src/workers/generation.worker.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "@types/socket.io": "^3.0.2",
+    "@types/uuid": "^11.0.0",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.22.3"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@types/cors": "^2.8.19",
+    "@types/mongoose": "^5.11.97",
+    "@types/multer": "^2.1.0",
+    "@types/pdf-parse": "^1.1.5",
+    "@types/tesseract.js": "^2.0.0",
+    "bullmq": "^5.77.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "ioredis": "^5.10.1",
+    "mongoose": "^9.6.2",
+    "multer": "^2.1.1",
+    "openai": "^6.39.0",
+    "pdf-parse": "^2.4.5",
+    "socket.io": "^4.8.3",
+    "tesseract.js": "^7.0.0",
+    "uuid": "^14.0.0",
+    "zod": "^4.4.3"
+  }
+}

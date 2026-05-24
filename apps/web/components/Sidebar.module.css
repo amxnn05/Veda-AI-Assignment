@@ -1,0 +1,147 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #EE5253 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A1A1A;
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1A1A1A;
+  color: white;
+  padding: 12px;
+  border-radius: 24px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  transition: background-color 0.2s;
+}
+
+.createButton:hover {
+  background-color: #333;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #6C757D;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.navItem:hover {
+  background-color: #F8F9FA;
+  color: #1A1A1A;
+}
+
+.active {
+  background-color: #F1F3F5;
+  color: #1A1A1A;
+}
+
+.badge {
+  margin-left: auto;
+  background-color: #FF6B6B;
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profileCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #F8F9FA;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #E9ECEF;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.schoolName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.schoolLocation {
+  font-size: 11px;
+  color: #6C757D;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Hide on mobile for now, we'll use a bottom nav or hamburger later */
+  }
+}

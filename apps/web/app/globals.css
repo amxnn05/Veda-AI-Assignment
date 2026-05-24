@@ -1,0 +1,43 @@
+:root {
+  --background: #F8F9FA;
+  --foreground: #1A1A1A;
+  --sidebar-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --border-color: #E9ECEF;
+  --text-muted: #6C757D;
+  --primary: #000000;
+  --primary-hover: #333333;
+  --accent: #FF4D4D; /* For the 'X' and some accents */
+  --status-green: #28A745;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

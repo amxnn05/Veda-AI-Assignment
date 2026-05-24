@@ -1,0 +1,357 @@
+.loadingContainer, .errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 16px;
+  color: #6C757D;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: #1A1A1A;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.backBtn {
+  background-color: #1A1A1A;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.aiHeader {
+  background-color: #212529;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: white;
+}
+
+.aiProfile {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.aiAvatar {
+  width: 48px;
+  height: 48px;
+  background-color: #343A40;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.aiAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aiMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.aiMessage p {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.aiActions {
+  display: flex;
+  gap: 12px;
+}
+
+.downloadBtn, .regenerateBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #343A40;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  width: fit-content;
+  transition: all 0.2s;
+}
+
+.downloadBtn:hover, .regenerateBtn:hover {
+  background-color: #495057;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.paperCard {
+  background-color: white;
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+}
+
+.paperHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.schoolName {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 12px;
+}
+
+.subjectHeader, .classHeader {
+  font-size: 18px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+.paperMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.generalInstruction {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 32px;
+}
+
+.studentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+  max-width: 400px;
+}
+
+.infoLine {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.inputLine {
+  flex: 1;
+  border-bottom: 1px solid #CED4DA;
+  height: 20px;
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.sectionHeader {
+  margin-bottom: 24px;
+}
+
+.questionTypeTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+
+.questionTypeSub {
+  font-size: 13px;
+  font-style: italic;
+  color: #6C757D;
+}
+
+.questionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.questionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+}
+
+.questionItem:hover {
+  background-color: #F8F9FA;
+}
+
+.questionMain {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.questionText {
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+
+.qNumber {
+  font-weight: 700;
+}
+
+.qMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 24px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.easy { background-color: #D4EDDA; color: #155724; }
+.moderate { background-color: #FFF3CD; color: #856404; }
+.challenging { background-color: #F8D7DA; color: #721C24; }
+
+.qMarks {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6C757D;
+}
+
+.qRegenerate {
+  color: #ADB5BD;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.qRegenerate:hover {
+  background-color: #E9ECEF;
+  color: #1A1A1A;
+}
+
+.endOfPaper {
+  text-align: center;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 40px 0;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #E9ECEF;
+}
+
+.answerKeySection {
+  margin-top: 40px;
+}
+
+.answerKeyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 20px;
+}
+
+.answersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.answerItem {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #495057;
+}
+
+.aNumber {
+  font-weight: 700;
+  color: #1A1A1A;
+}
+
+.actions {
+  position: fixed;
+  bottom: 40px;
+  left: 300px;
+  z-index: 100;
+}
+
+.backFab {
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  border: 1px solid #DEE2E6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #1A1A1A;
+  transition: all 0.2s;
+}
+
+.backFab:hover {
+  transform: scale(1.1);
+  background-color: #F8F9FA;
+}
+
+@media (max-width: 768px) {
+  .paperCard {
+    padding: 30px 20px;
+  }
+  
+  .schoolName {
+    font-size: 18px;
+  }
+  
+  .actions {
+    left: 20px;
+  }
+}
