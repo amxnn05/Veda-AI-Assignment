@@ -57,72 +57,90 @@ export const Sidebar = ({ compact = false }: SidebarProps) => {
   ];
 
   return (
-    <aside className={clsx(
-      styles.sidebar,
-      usesAssignmentPageSidebar && styles.compactHeight,
-      compact && styles.compactSidebar
-    )}>
-      <div className={styles.top}>
-        <div className={styles.logoContainer}>
-          <div className={styles.logo}>
-            <Image src="/veda-logo.svg" alt="VedaAI logo" width={32} height={32} priority />
+    <>
+      <aside className={clsx(
+        styles.sidebar,
+        usesAssignmentPageSidebar && styles.compactHeight,
+        compact && styles.compactSidebar
+      )}>
+        <div className={styles.top}>
+          <div className={styles.logoContainer}>
+            <div className={styles.logo}>
+              <Image src="/veda-logo.svg" alt="VedaAI logo" width={32} height={32} priority />
+            </div>
+            <span className={styles.logoText}>VedaAI</span>
           </div>
-          <span className={styles.logoText}>VedaAI</span>
+
+          <Link href="/assignments/create" className={styles.createButton} title="Create Assignment">
+            <Sparkles size={18} />
+            <span>Create Assignment</span>
+          </Link>
+
+          <nav className={styles.nav}>
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || (item.href === '/assignments' && pathname.startsWith('/assignments'));
+              return (
+                <Link 
+                  key={item.label} 
+                  href={item.href} 
+                  className={clsx(styles.navItem, isActive && styles.active)}
+                  title={item.label}
+                >
+                  <item.icon size={20} />
+                  <span>{item.label}</span>
+                  {item.badge && <span className={styles.badge}>{item.badge}</span>}
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        <Link href="/assignments/create" className={styles.createButton} title="Create Assignment">
-          <Sparkles size={18} />
-          <span>Create Assignment</span>
-        </Link>
+        <div className={styles.bottom}>
+          <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle dark mode">
+            <span className={styles.themeIcon}>
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </span>
+            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          </button>
 
-        <nav className={styles.nav}>
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href === '/assignments' && pathname.startsWith('/assignments'));
-            return (
-              <Link 
-                key={item.label} 
-                href={item.href} 
-                className={clsx(styles.navItem, isActive && styles.active)}
-                title={item.label}
-              >
-                <item.icon size={20} />
-                <span>{item.label}</span>
-                {item.badge && <span className={styles.badge}>{item.badge}</span>}
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
+          <Link href="/settings" className={clsx(styles.navItem, pathname === '/settings' && styles.active)} title="Settings">
+            <Settings size={20} />
+            <span>Settings</span>
+          </Link>
 
-      <div className={styles.bottom}>
-        <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle dark mode">
-          <span className={styles.themeIcon}>
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </span>
-          <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-        </button>
-
-        <Link href="/settings" className={clsx(styles.navItem, pathname === '/settings' && styles.active)} title="Settings">
-          <Settings size={20} />
-          <span>Settings</span>
-        </Link>
-
-        <div className={styles.profileCard}>
-          <div className={styles.avatar}>
-            <Image
-              src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=School"}
-              alt="School Logo"
-              width={40}
-              height={40}
-              unoptimized
-            />
-          </div>
-          <div className={styles.profileInfo}>
-            <p className={styles.schoolName}>{user?.schoolName || 'Delhi Public School'}</p>
-            <p className={styles.schoolLocation}>{user?.location || 'Bokaro Steel City'}</p>
+          <div className={styles.profileCard}>
+            <div className={styles.avatar}>
+              <Image
+                src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=School"}
+                alt="School Logo"
+                width={40}
+                height={40}
+                unoptimized
+              />
+            </div>
+            <div className={styles.profileInfo}>
+              <p className={styles.schoolName}>{user?.schoolName || 'Delhi Public School'}</p>
+              <p className={styles.schoolLocation}>{user?.location || 'Bokaro Steel City'}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+
+      <nav className={styles.mobileNav} aria-label="Mobile navigation">
+        {navItems.filter((item) => item.href !== '/groups').map((item) => {
+          const isActive = pathname === item.href || (item.href === '/assignments' && pathname.startsWith('/assignments'));
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={clsx(styles.mobileNavItem, isActive && styles.mobileActive)}
+            >
+              <item.icon size={17} />
+              <span>{item.label.replace('AI Teacher\'s Toolkit', 'AI Toolkit')}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </>
   );
 };

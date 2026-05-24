@@ -27,6 +27,11 @@
   left: 112px; /* 12px gap + 88px sidebar + 12px gap */
 }
 
+.mobileBrand,
+.menuButton {
+  display: none;
+}
+
 .left {
   display: flex;
   align-items: center;
@@ -142,20 +147,77 @@
 }
 
 @media (max-width: 768px) {
+  .mobileBrand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--foreground);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .mobileLogo {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+
+  .left {
+    display: none;
+  }
+
   .userName {
     display: none;
   }
+
   .header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    margin: 0;
-    padding: 0 16px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    height: 48px;
+    border-radius: 12px;
+    padding: 0 10px;
+    z-index: 1200;
+    background-color: color-mix(in srgb, var(--header-bg) 92%, white 8%);
+  }
+
+  .right {
+    gap: 6px;
+    animation: none;
+  }
+
+  .iconButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userProfile {
+    padding: 0;
+    gap: 0;
+  }
+
+  .userProfile svg {
+    display: none;
+  }
+
+  .userAvatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .menuButton {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--foreground);
+    border-radius: 9px;
   }
 }

@@ -172,6 +172,9 @@ export default function CreateAssignmentPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
+        <button type="button" className={styles.mobileBackButton} onClick={() => router.back()} aria-label="Go back">
+          <ChevronLeft size={18} />
+        </button>
         <div className={styles.statusDot} />
         <div>
           <h1 className={styles.title}>Create Assignment</h1>

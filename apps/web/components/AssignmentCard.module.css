@@ -298,3 +298,49 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 14px;
+    padding: 18px 16px;
+    gap: 24px;
+    background-color: color-mix(in srgb, var(--card-bg) 94%, white 4%);
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .moreButton {
+    padding: 0;
+  }
+
+  .footer {
+    padding-top: 0;
+    border-top: 0;
+    gap: 8px;
+  }
+
+  .info {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .label,
+  .value {
+    white-space: nowrap;
+  }
+
+  .dropdown {
+    min-width: 128px;
+    border-radius: 10px;
+  }
+}

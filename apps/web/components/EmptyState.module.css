@@ -117,3 +117,54 @@
   transform: translateY(-1px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
+
+@media (max-width: 768px) {
+  .container {
+    min-height: calc(100vh - 170px);
+    padding: 34px 14px 96px;
+    max-width: 100%;
+  }
+
+  .illustration {
+    margin-bottom: 22px;
+  }
+
+  .circle {
+    width: 172px;
+    height: 172px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .paper {
+    width: 62px;
+    height: 78px;
+  }
+
+  .magnifierCircle {
+    width: 78px;
+    height: 78px;
+  }
+
+  .xIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .title {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 22px;
+  }
+
+  .button {
+    padding: 12px 18px;
+    font-size: 12px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  }
+}

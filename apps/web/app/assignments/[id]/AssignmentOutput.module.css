@@ -1016,27 +1016,49 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
   .aiHeader {
-    padding: 18px;
-    border-radius: 18px;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 12px;
   }
 
   .aiProfile {
     align-items: flex-start;
+    gap: 12px;
   }
 
   .aiAvatar {
-    width: 46px;
-    height: 46px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .aiMessage {
+    gap: 12px;
+  }
+
+  .aiMessage p {
+    font-size: 10px;
+    line-height: 1.45;
   }
 
   .aiActions {
     width: 100%;
+    gap: 7px;
   }
 
   .downloadBtn, .analysisBtn, .regenerateBtn {
-    flex: 1 1 100%;
-    width: 100%;
+    min-height: 34px;
+    flex: 0 0 auto;
+    width: auto;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 0;
   }
 
   .modalContent {
@@ -1078,14 +1100,106 @@
   }
 
   .paperCard {
-    padding: 30px 20px;
+    padding: 26px 16px;
+    border-radius: 12px;
+    border-color: rgba(222, 226, 230, 0.86);
   }
   
   .schoolName {
-    font-size: 18px;
+    font-size: 17px;
+    line-height: 1.22;
+  }
+
+  .paperHeader {
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+  }
+
+  .subjectHeader,
+  .classHeader {
+    font-size: 11px;
+  }
+
+  .paperMeta {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 10px;
+    line-height: 1.8;
+  }
+
+  .instructionsSection {
+    padding: 10px;
+    margin-bottom: 22px;
+  }
+
+  .instructionsTitle,
+  .generalInstruction {
+    font-size: 10px;
+  }
+
+  .studentInfo {
+    gap: 8px;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+
+  .infoLine {
+    font-size: 10px;
+  }
+
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .sectionTitle {
+    font-size: 14px;
+    padding: 7px 0;
+    margin-bottom: 18px;
+  }
+
+  .questionTypeTitle {
+    font-size: 11px;
+  }
+
+  .questionTypeSub {
+    font-size: 10px;
+  }
+
+  .questionsList {
+    gap: 15px;
+  }
+
+  .questionItem {
+    gap: 8px;
+    padding: 6px 0;
+  }
+
+  .questionText {
+    font-size: 10.5px;
+    line-height: 1.55;
+  }
+
+  .qNumber {
+    font-size: 11px;
+    margin-right: 5px;
+  }
+
+  .qRegenerate {
+    display: none;
+  }
+
+  .optionsGrid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-left: 18px;
+  }
+
+  .optionItem,
+  .qMetaBottom {
+    font-size: 10px;
   }
   
   .actions {
-    left: 20px;
+    display: none;
   }
 }

@@ -30,4 +30,14 @@
   .mainContent {
     margin-left: 0;
   }
+
+  .container {
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.42), transparent 28%),
+      #CFCFCF;
+  }
+
+  .content {
+    padding: 72px 10px 92px;
+  }
 }

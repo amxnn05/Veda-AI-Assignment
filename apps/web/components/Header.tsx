@@ -5,7 +5,8 @@ import {
   ArrowLeft, 
   Bell, 
   ChevronDown,
-  LayoutGrid
+  LayoutGrid,
+  Menu
 } from 'lucide-react';
 import styles from './Header.module.css';
 import { clsx } from 'clsx';
@@ -21,6 +22,13 @@ export const Header = ({ title = 'Assignment', showBack = true, compactSidebar =
 
   return (
     <header className={clsx(styles.header, compactSidebar && styles.compactSidebarOffset)}>
+      <div className={styles.mobileBrand}>
+        <div className={styles.mobileLogo}>
+          <Image src="/veda-logo.svg" alt="VedaAI logo" width={26} height={26} priority />
+        </div>
+        <span>VedaAI</span>
+      </div>
+
       <div className={styles.left}>
         {showBack && (
           <button onClick={() => router.back()} className={styles.backButton}>
@@ -46,6 +54,10 @@ export const Header = ({ title = 'Assignment', showBack = true, compactSidebar =
           <span className={styles.userName}>John Doe</span>
           <ChevronDown size={16} />
         </div>
+
+        <button className={styles.menuButton} aria-label="Open menu">
+          <Menu size={19} />
+        </button>
       </div>
     </header>
   );

@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, Filter, Plus, Loader2, X } from 'lucide-react';
+import { Search, Filter, Plus, Loader2, X, ChevronLeft } from 'lucide-react';
 import { EmptyState } from '@/components/EmptyState';
 import { AssignmentCard } from '@/components/AssignmentCard';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import styles from './AssignmentsPage.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function AssignmentsPage() {
   const { assignments, fetchAssignments, loading, error } = useAssignmentStore();
+  const router = useRouter();
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -59,6 +61,9 @@ export default function AssignmentsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
+        <button type="button" className={styles.mobileBackButton} onClick={() => router.back()} aria-label="Go back">
+          <ChevronLeft size={18} />
+        </button>
         <div className={styles.titleSection}>
           <div className={styles.statusDot} />
           <div>
