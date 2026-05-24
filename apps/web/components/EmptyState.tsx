@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Plus, Search, XCircle } from 'lucide-react';
+import { Plus, XCircle } from 'lucide-react';
 import styles from './EmptyState.module.css';
 
 export const EmptyState = () => {

@@ -11,7 +11,9 @@ import {
   Wand2, 
   Library, 
   Settings, 
-  Sparkles
+  Sparkles,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
@@ -22,6 +24,24 @@ export const Sidebar = () => {
   const pathname = usePathname();
   const { assignments } = useAssignmentStore();
   const { user } = useUserStore();
+  const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
+
+  React.useEffect(() => {
+    const savedTheme = window.localStorage.getItem('veda-theme') as 'light' | 'dark' | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    setTheme(initialTheme);
+    document.documentElement.dataset.theme = initialTheme;
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    window.localStorage.setItem('veda-theme', nextTheme);
+  };
 
   const navItems = [
     { icon: Home, label: 'Home', href: '/' },
@@ -65,6 +85,13 @@ export const Sidebar = () => {
       </div>
 
       <div className={styles.bottom}>
+        <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle dark mode">
+          <span className={styles.themeIcon}>
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </span>
+          <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+        </button>
+
         <Link href="/settings" className={clsx(styles.navItem, pathname === '/settings' && styles.active)}>
           <Settings size={20} />
           <span>Settings</span>

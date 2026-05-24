@@ -3,7 +3,8 @@ export const buildPrompt = (
     instructions: string,
     questionTypes?: any[],
     fileContent?: string,
-    maxTime?: number
+    maxTime?: number,
+    className?: string
 ) => {
     const typesRequirement = questionTypes && questionTypes.length > 0
         ? `You MUST generate the following exact number and types of questions:
@@ -15,12 +16,16 @@ Generate a structured question paper based on the following context.
 
 Context:
 Subject: ${subject}
+Class/Grade: ${className || "Not specified"}
 Additional Instructions: ${instructions || "None"}
 Maximum Time Allowed: ${maxTime ? `${maxTime} minutes` : "Not specified"}
 Extracted Content from uploaded document: ${fileContent || "None"}
 
 Strict Requirements:
 ${typesRequirement}
+- Generate questions ONLY for the specified class/grade level.
+- Match the wording, concept depth, calculations, and difficulty to Class/Grade: ${className || "the provided class"}.
+- Do not generate questions above the specified class level unless the uploaded content or teacher instructions explicitly require it.
 - Each question must have the exact marks assigned as specified above.
 - Group questions into appropriate sections based on their type (e.g., Section A for MCQs, Section B for Short Questions).
 - For "Multiple Choice Questions", you MUST provide exactly 4 options in the "options" array.

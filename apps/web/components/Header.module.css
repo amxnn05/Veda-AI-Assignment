@@ -1,6 +1,7 @@
 .header {
   height: 64px;
-  background-color: var(--sidebar-bg);
+  background-color: var(--header-bg);
+  backdrop-filter: var(--blur-sm);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -10,6 +11,7 @@
   top: 0;
   z-index: 90;
   width: 100%;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.04);
 }
 
 .left {
@@ -26,13 +28,13 @@
   height: 32px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  color: #6C757D;
+  color: var(--text-muted);
   transition: all 0.2s;
 }
 
 .backButton:hover {
-  background-color: #F8F9FA;
-  color: #1A1A1A;
+  background-color: var(--surface-soft);
+  color: var(--foreground);
 }
 
 .breadcrumbs {
@@ -40,19 +42,20 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  background-color: #F8F9FA;
-  border: 1px dashed #CED4DA;
-  border-radius: 6px;
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
 }
 
 .breadcrumbIcon {
-  color: #6C757D;
+  color: var(--text-muted);
 }
 
 .breadcrumbText {
   font-size: 14px;
-  font-weight: 500;
-  color: #495057;
+  font-weight: 550;
+  color: var(--text-muted);
 }
 
 .right {
@@ -63,10 +66,19 @@
 
 .iconButton {
   position: relative;
-  color: #6C757D;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.iconButton:hover {
+  background-color: var(--surface-soft);
+  color: var(--foreground);
 }
 
 .notificationDot {
@@ -76,7 +88,7 @@
   width: 8px;
   height: 8px;
   background-color: #FF6B6B;
-  border: 2px solid white;
+  border: 2px solid var(--header-bg);
   border-radius: 50%;
 }
 
@@ -91,7 +103,7 @@
 }
 
 .userProfile:hover {
-  background-color: #F8F9FA;
+  background-color: var(--surface-soft);
 }
 
 .userAvatar {
@@ -99,7 +111,7 @@
   height: 32px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #E9ECEF;
+  background-color: var(--surface-hover);
 }
 
 .userAvatar img {
@@ -110,8 +122,8 @@
 
 .userName {
   font-size: 14px;
-  font-weight: 600;
-  color: #1A1A1A;
+  font-weight: 650;
+  color: var(--foreground);
 }
 
 @media (max-width: 768px) {

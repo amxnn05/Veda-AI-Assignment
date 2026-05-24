@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { 
   ArrowLeft, 
@@ -38,7 +39,7 @@ export const Header = ({ title = 'Assignment', showBack = true }: HeaderProps) =
         
         <div className={styles.userProfile}>
           <div className={styles.userAvatar}>
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="User Avatar" />
+            <Image src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="User Avatar" width={32} height={32} unoptimized />
           </div>
           <span className={styles.userName}>John Doe</span>
           <ChevronDown size={16} />

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical, Eye, Trash2 } from 'lucide-react';
+import { MoreVertical } from 'lucide-react';
 import styles from './AssignmentCard.module.css';
 import { Assignment, useAssignmentStore } from '../store/assignmentStore';
 import { format } from 'date-fns';
@@ -30,7 +30,7 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
       const date = new Date(dateStr);
       if (isNaN(date.getTime())) return 'Not set';
       return format(date, 'dd-MM-yyyy');
-    } catch (e) {
+    } catch {
       return 'Not set';
     }
   };

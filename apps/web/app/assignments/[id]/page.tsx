@@ -249,10 +249,6 @@ export default function AssignmentOutputPage() {
           </div>
         ))}
 
-        <div className={styles.endOfPaper}>
-          --- END OF QUESTION PAPER ---
-        </div>
-
         {paper.answerKey && paper.answerKey.length > 0 && (
           <div className={styles.answerKeySection}>
             <h3 className={styles.answerKeyTitle}>Answer Key:</h3>

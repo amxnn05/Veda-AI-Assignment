@@ -150,11 +150,16 @@ export default function CreateAssignmentPage() {
       }
 
       if (data.success) {
-        addAssignment({
+        const createdAssignment = {
           ...data.assignment,
           id: data.assignment._id
+        };
+
+        addAssignment({
+          ...createdAssignment,
+          status: createdAssignment.status || 'pending'
         });
-        router.push('/assignments');
+        router.push(`/assignments/${createdAssignment.id}`);
       }
     } catch (error) {
       console.error('Failed to create assignment:', error);
