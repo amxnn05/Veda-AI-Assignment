@@ -17,7 +17,6 @@ type Analysis = {
   mainFocus?: string;
   strongTopics?: string[];
   weakTopics?: string[];
-  bloomsTaxonomy?: Record<string, number>;
   syllabusCoverage?: {
     topic?: string;
     percentage?: number;
@@ -196,25 +195,6 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
                   ? analysis.weakTopics.map((topic) => <span key={topic} className={`${styles.tag} ${styles.weakTag}`}>{topic}</span>)
                   : <span className={styles.emptyTag}>No weak coverage listed</span>}
               </div>
-            </div>
-          </div>
-
-          <div className={styles.analysisItem}>
-            <label>Bloom&apos;s Taxonomy Breakdown</label>
-            <div className={styles.statsList}>
-              {analysis.bloomsTaxonomy && Object.entries(analysis.bloomsTaxonomy).length > 0 ? (
-                Object.entries(analysis.bloomsTaxonomy).map(([key, val]) => (
-                  <div key={key} className={styles.statRow}>
-                    <span className={styles.statLabel}>{key.toUpperCase()}</span>
-                    <div className={styles.statBar}>
-                      <div className={styles.statFill} style={{ width: `${Math.min(100, val * 10)}%` }} />
-                    </div>
-                    <span className={styles.statVal}>{val}</span>
-                  </div>
-                ))
-              ) : (
-                <p className={styles.mutedText}>No taxonomy breakdown is available.</p>
-              )}
             </div>
           </div>
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { 
   Home, 
@@ -10,8 +11,7 @@ import {
   Wand2, 
   Library, 
   Settings, 
-  Plus,
-  ChevronDown
+  Sparkles
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
@@ -36,13 +36,13 @@ export const Sidebar = () => {
       <div className={styles.top}>
         <div className={styles.logoContainer}>
           <div className={styles.logo}>
-            <span className={styles.logoV}>V</span>
+            <Image src="/veda-logo.svg" alt="VedaAI logo" width={32} height={32} priority />
           </div>
           <span className={styles.logoText}>VedaAI</span>
         </div>
 
         <Link href="/assignments/create" className={styles.createButton}>
-          <Plus size={18} />
+          <Sparkles size={18} />
           <span>Create Assignment</span>
         </Link>
 
@@ -72,7 +72,13 @@ export const Sidebar = () => {
 
         <div className={styles.profileCard}>
           <div className={styles.avatar}>
-            <img src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=School"} alt="School Logo" />
+            <Image
+              src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=School"}
+              alt="School Logo"
+              width={40}
+              height={40}
+              unoptimized
+            />
           </div>
           <div className={styles.profileInfo}>
             <p className={styles.schoolName}>{user?.schoolName || 'Delhi Public School'}</p>

@@ -48,7 +48,8 @@ new Worker(
                     assignment.subject || "",
                     assignment.instructions || "",
                     assignment.questionTypes,
-                    assignment.fileContent || undefined
+                    assignment.fileContent || undefined,
+                    assignment.maxTime || undefined
                 );
 
 

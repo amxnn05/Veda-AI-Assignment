@@ -1,4 +1,5 @@
 import express from "express";
+import type { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { createServer } from "http";
@@ -30,6 +31,22 @@ app.use(
 app.use(
     "/api/questions",
     questionRoutes
+);
+
+app.use(
+    (
+        error: Error,
+        _req: Request,
+        res: Response,
+        _next: NextFunction
+    ) => {
+        console.error("API Error:", error.message);
+
+        res.status(400).json({
+            success: false,
+            message: error.message || "Request failed"
+        });
+    }
 );
 
 io.on("connection", (socket) => {

@@ -82,6 +82,22 @@
   gap: 8px;
   background-color: #F8F9FA;
   margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.uploadBox:hover, .uploadBoxActive {
+  border-color: #ADB5BD;
+  background-color: #F1F3F5;
+}
+
+.uploadBoxActive {
+  transform: translateY(-1px);
+}
+
+.uploadBoxReady {
+  border-color: #74C0FC;
+  background-color: #F0F8FF;
 }
 
 .uploadIcon {
@@ -119,6 +135,49 @@
   font-size: 14px;
   color: #6C757D;
   text-align: center;
+}
+
+.fileSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #DEE2E6;
+  border-radius: 14px;
+  background-color: #FFFFFF;
+}
+
+.fileSummary p {
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.fileSummary span {
+  color: #6C757D;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.clearFileBtn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6C757D;
+  border: 1px solid #DEE2E6;
+  border-radius: 10px;
+  background-color: #F8F9FA;
+  transition: all 0.2s;
+}
+
+.clearFileBtn:hover {
+  color: #E03131;
+  border-color: #FFC9C9;
+  background-color: #FFF5F5;
 }
 
 .inputGroup {
@@ -171,6 +230,44 @@
   position: absolute;
   right: 16px;
   color: #6C757D;
+}
+
+.timeInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.timeIcon {
+  position: absolute;
+  left: 16px;
+  color: #6C757D;
+  pointer-events: none;
+}
+
+.timeInput {
+  padding-left: 46px;
+  padding-right: 120px;
+}
+
+.timeUnitSelect {
+  position: absolute;
+  right: 8px;
+  width: 104px;
+  height: 34px;
+  padding: 0 10px;
+  color: #495057;
+  background-color: white;
+  border: 1px solid #DEE2E6;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.timeUnitSelect:focus {
+  outline: none;
+  border-color: #ADB5BD;
 }
 
 .questionTypesSection {
@@ -378,6 +475,11 @@
   background-color: #1A1A1A;
   padding: 10px 24px;
   border-radius: 24px;
+}
+
+.nextButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 @media (max-width: 768px) {

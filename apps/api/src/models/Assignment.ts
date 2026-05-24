@@ -22,6 +22,9 @@ const assignmentSchema = new mongoose.Schema(
         dueDate: {
             type: Date
         },
+        maxTime: {
+            type: Number
+        },
         generatedPaper: {
             type: Object
         },
@@ -30,6 +33,12 @@ const assignmentSchema = new mongoose.Schema(
         },
         fileType: {
             type: String
+        },
+        fileName: {
+            type: String
+        },
+        extractedTextLength: {
+            type: Number
         },
         schoolName: {
             type: String

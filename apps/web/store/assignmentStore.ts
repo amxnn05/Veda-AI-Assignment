@@ -12,6 +12,7 @@ export interface Assignment {
   subject: string;
   instructions: string;
   dueDate: string;
+  maxTime?: number;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   questionTypes: QuestionType[];
   totalQuestions: number;
@@ -20,6 +21,8 @@ export interface Assignment {
   generatedPaper?: any;
   fileContent?: string;
   fileType?: string;
+  fileName?: string;
+  extractedTextLength?: number;
   schoolName?: string;
   className?: string;
   location?: string;

@@ -10,7 +10,7 @@ import {
   ChevronLeft, 
   ChevronRight,
   ChevronDown,
-  Calendar as CalendarIcon
+  Clock3
 } from 'lucide-react';
 import styles from './CreateAssignment.module.css';
 import { useRouter } from 'next/navigation';
@@ -28,6 +28,14 @@ const QUESTION_TYPES = [
   'True/False'
 ];
 
+const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
+const ACCEPTED_FILE_TYPES = new Set([
+  'application/pdf',
+  'image/jpeg',
+  'image/png',
+  'image/webp'
+]);
+
 export default function CreateAssignmentPage() {
   const router = useRouter();
   const { addAssignment } = useAssignmentStore();
@@ -37,8 +45,13 @@ export default function CreateAssignmentPage() {
   const [schoolName, setSchoolName] = useState('');
   const [className, setClassName] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [maxTime, setMaxTime] = useState(45);
+  const [maxTimeUnit, setMaxTimeUnit] = useState<'minutes' | 'hours'>('minutes');
   const [instructions, setInstructions] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState('');
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -66,22 +79,42 @@ export default function CreateAssignmentPage() {
     setQuestionTypes(questionTypes.map(q => q.id === id ? { ...q, ...updates } : q));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+  const handleSelectedFile = (selectedFile?: File) => {
+    if (!selectedFile) return;
+
+    if (!ACCEPTED_FILE_TYPES.has(selectedFile.type)) {
+      setFile(null);
+      setFileError('Upload a PDF, JPEG, PNG, or WEBP file.');
+      return;
     }
+
+    if (selectedFile.size > MAX_UPLOAD_SIZE) {
+      setFile(null);
+      setFileError('File size must be 10MB or less.');
+      return;
+    }
+
+    setFile(selectedFile);
+    setFileError('');
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleSelectedFile(e.target.files?.[0]);
   };
 
   const totalQuestions = questionTypes.reduce((acc, q) => acc + (q.count || 0), 0);
   const totalMarks = questionTypes.reduce((acc, q) => acc + ((q.count || 0) * (q.marks || 0)), 0);
 
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+
     // Validation
     const newErrors: Record<string, boolean> = {
       subject: !subject.trim(),
       schoolName: !schoolName.trim(),
       className: !className.trim(),
       dueDate: !dueDate,
+      maxTime: maxTime < 1,
     };
 
     setErrors(newErrors);
@@ -97,20 +130,25 @@ export default function CreateAssignmentPage() {
     formData.append('location', user?.location || '');
     formData.append('instructions', instructions);
     formData.append('dueDate', dueDate);
+    formData.append('maxTime', String(maxTimeUnit === 'hours' ? maxTime * 60 : maxTime));
+    formData.append('maxTimeUnit', maxTimeUnit);
     formData.append('questionTypes', JSON.stringify(questionTypes));
     if (file) {
       formData.append('file', file);
     }
-    
-    // Also include question types if the backend supports it
-    // formData.append('questionTypes', JSON.stringify(questionTypes));
 
     try {
+      setIsSubmitting(true);
       const response = await fetch('http://localhost:5000/api/assignments', {
         method: 'POST',
         body: formData,
       });
       const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to create assignment');
+      }
+
       if (data.success) {
         addAssignment({
           ...data.assignment,
@@ -120,6 +158,9 @@ export default function CreateAssignmentPage() {
       }
     } catch (error) {
       console.error('Failed to create assignment:', error);
+      setFileError(error instanceof Error ? error.message : 'Failed to create assignment');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -142,12 +183,24 @@ export default function CreateAssignmentPage() {
         <p className={styles.sectionSubtitle}>Basic information about your assignment</p>
 
         <div className={styles.uploadArea}>
-          <label className={styles.uploadBox}>
+          <label
+            className={clsx(styles.uploadBox, isDraggingFile && styles.uploadBoxActive, file && styles.uploadBoxReady)}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDraggingFile(true);
+            }}
+            onDragLeave={() => setIsDraggingFile(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setIsDraggingFile(false);
+              handleSelectedFile(e.dataTransfer.files?.[0]);
+            }}
+          >
             <input 
               type="file" 
               className={styles.fileInput} 
               onChange={handleFileChange}
-              accept="image/*,application/pdf"
+              accept="image/jpeg,image/png,image/webp,application/pdf"
               style={{ display: 'none' }}
             />
             <Upload className={styles.uploadIcon} size={32} />
@@ -156,10 +209,30 @@ export default function CreateAssignmentPage() {
                 <>Choose a file or <span>drag & drop it here</span></>
               )}
             </p>
-            <p className={styles.uploadHint}>JPEG, PNG, PDF upto 10MB</p>
+            <p className={styles.uploadHint}>PDF, JPEG, PNG, WEBP up to 10MB. Text will be extracted and used by AI.</p>
             <div className={styles.browseButton}>Browse Files</div>
           </label>
-          <p className={styles.uploadFooterText}>Upload images or PDF of your preferred document</p>
+          {file ? (
+            <div className={styles.fileSummary}>
+              <div>
+                <p>{file.name}</p>
+                <span>{(file.size / 1024 / 1024).toFixed(2)} MB • Ready for text extraction</span>
+              </div>
+              <button
+                type="button"
+                className={styles.clearFileBtn}
+                onClick={() => {
+                  setFile(null);
+                  setFileError('');
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ) : (
+            <p className={styles.uploadFooterText}>Upload a source PDF or image. The server extracts its text before generation.</p>
+          )}
+          {fileError && <span className={styles.errorText}>{fileError}</span>}
         </div>
 
         <div className={styles.inputGroup}>
@@ -222,6 +295,48 @@ export default function CreateAssignmentPage() {
             />
           </div>
           {errors.dueDate && <span className={styles.errorText}>Due date is required</span>}
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Maximum Paper Time</label>
+          <div className={styles.timeInputWrapper}>
+            <Clock3 className={styles.timeIcon} size={18} />
+            <input
+              type="number"
+              min={1}
+              step={maxTimeUnit === 'hours' ? 0.5 : 5}
+              placeholder={maxTimeUnit === 'hours' ? '1.5' : '45'}
+              className={clsx(styles.input, styles.timeInput, errors.maxTime && styles.errorInput)}
+              value={maxTime}
+              onChange={(e) => {
+                setMaxTime(Number(e.target.value));
+                if (errors.maxTime) setErrors({ ...errors, maxTime: false });
+              }}
+            />
+            <select
+              className={styles.timeUnitSelect}
+              value={maxTimeUnit}
+              onChange={(e) => {
+                const nextUnit = e.target.value as 'minutes' | 'hours';
+                setMaxTimeUnit(nextUnit);
+                setMaxTime((current) => {
+                  if (nextUnit === 'hours' && maxTimeUnit === 'minutes') {
+                    return Math.max(1, Number((current / 60).toFixed(1)));
+                  }
+
+                  if (nextUnit === 'minutes' && maxTimeUnit === 'hours') {
+                    return Math.max(1, Math.round(current * 60));
+                  }
+
+                  return current;
+                });
+              }}
+            >
+              <option value="minutes">minutes</option>
+              <option value="hours">hours</option>
+            </select>
+          </div>
+          {errors.maxTime && <span className={styles.errorText}>Maximum time must be at least 1 minute</span>}
         </div>
 
         <div className={styles.questionTypesSection}>
@@ -320,8 +435,8 @@ export default function CreateAssignmentPage() {
           <ChevronLeft size={18} />
           <span>Previous</span>
         </button>
-        <button onClick={handleSubmit} className={styles.nextButton}>
-          <span>Next</span>
+        <button onClick={handleSubmit} className={styles.nextButton} disabled={isSubmitting}>
+          <span>{isSubmitting ? 'Extracting & Creating...' : 'Next'}</span>
           <ChevronRight size={18} />
         </button>
       </div>

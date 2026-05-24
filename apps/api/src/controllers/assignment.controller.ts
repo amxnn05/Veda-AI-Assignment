@@ -18,14 +18,19 @@ export const createAssignment =
         try {
             let fileContent = "";
             let fileType = "";
+            let fileName = "";
 
             if (req.file) {
                 fileType = req.file.mimetype;
+                fileName = req.file.originalname;
+
                 if (fileType === "application/pdf") {
                     fileContent = await extractPdfText(req.file.buffer);
                 } else if (fileType.startsWith("image/")) {
                     fileContent = await extractImageText(req.file.buffer);
                 }
+
+                fileContent = fileContent.trim();
             }
 
             const body = { ...req.body };
@@ -41,6 +46,10 @@ export const createAssignment =
                 delete body.dueDate;
             }
 
+            if (body.maxTime) {
+                body.maxTime = Number(body.maxTime);
+            }
+
             // Calculate totals
             if (Array.isArray(body.questionTypes)) {
                 body.totalQuestions = body.questionTypes.reduce((acc: number, qt: any) => acc + (qt.count || 0), 0);
@@ -51,7 +60,9 @@ export const createAssignment =
                 await Assignment.create({
                     ...body,
                     fileContent,
-                    fileType
+                    fileType,
+                    fileName,
+                    extractedTextLength: fileContent.length
                 });
 
             await generationQueue.add(
@@ -64,7 +75,8 @@ export const createAssignment =
 
             res.status(201).json({
                 success: true,
-                assignment
+                assignment,
+                extractedTextLength: fileContent.length
             });
         } catch (error) {
             console.error("Create Assignment Error:", error);

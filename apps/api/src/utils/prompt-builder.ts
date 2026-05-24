@@ -2,7 +2,8 @@ export const buildPrompt = (
     subject: string,
     instructions: string,
     questionTypes?: any[],
-    fileContent?: string
+    fileContent?: string,
+    maxTime?: number
 ) => {
     const typesRequirement = questionTypes && questionTypes.length > 0
         ? `You MUST generate the following exact number and types of questions:
@@ -15,6 +16,7 @@ Generate a structured question paper based on the following context.
 Context:
 Subject: ${subject}
 Additional Instructions: ${instructions || "None"}
+Maximum Time Allowed: ${maxTime ? `${maxTime} minutes` : "Not specified"}
 Extracted Content from uploaded document: ${fileContent || "None"}
 
 Strict Requirements:
@@ -23,8 +25,9 @@ ${typesRequirement}
 - Group questions into appropriate sections based on their type (e.g., Section A for MCQs, Section B for Short Questions).
 - For "Multiple Choice Questions", you MUST provide exactly 4 options in the "options" array.
 - Generate clear instructions for each section.
+- Include "timeAllowed" at the top level. If maximum time is specified, use exactly that value formatted as minutes.
 - Add difficulty level (easy, medium, hard) for each question.
-- Analyze topic focus and Bloom's taxonomy level.
+- Analyze topic focus and weak coverage.
 - Estimate syllabus/topic coverage by percentage. The coverage percentages must add up to 100.
 - Predict student difficulty insights from the generated paper:
   - high-risk topics students are likely to struggle with
@@ -40,6 +43,7 @@ DO NOT include explanation.
 
 Format:
 {
+  "timeAllowed": "${maxTime ? `${maxTime} MINUTES` : "45 MINUTES"}",
   "sections": [
     {
       "title": "Section A",
@@ -51,8 +55,7 @@ Format:
           "answer": "Option 1",
           "difficulty": "easy",
           "marks": 1,
-          "topic": "",
-          "bloomsLevel": "remember"
+          "topic": ""
         }
       ]
     }
@@ -65,12 +68,6 @@ Format:
       "easy": 0,
       "medium": 0,
       "hard": 0
-    },
-    "bloomsTaxonomy": {
-      "remember": 0,
-      "understand": 0,
-      "apply": 0,
-      "analyze": 0
     },
     "syllabusCoverage": [
       {
