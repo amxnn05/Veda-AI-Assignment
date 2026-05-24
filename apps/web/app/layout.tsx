@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { MainLayout } from "@/components/MainLayout";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+const bricolageGrotesque = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${bricolageGrotesque.variable} ${bricolageGrotesque.className}`}>
         <MainLayout>
           {children}
         </MainLayout>

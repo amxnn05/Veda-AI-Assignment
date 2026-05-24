@@ -52,7 +52,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={clsx(styles.sidebar, pathname === '/assignments/create' && styles.compactHeight)}>
       <div className={styles.top}>
         <div className={styles.logoContainer}>
           <div className={styles.logo}>

@@ -8,13 +8,14 @@
 
 .mainContent {
   flex: 1;
-  margin-left: 260px; /* Width of Sidebar */
+  margin-left: 328px; /* 12px gap + 304px sidebar + 12px gap */
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .content {
-  padding: 24px;
+  padding: 80px 24px 24px; /* Added 80px top padding for header offset */
   flex: 1;
   color: var(--foreground);
   animation: pageEnter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
