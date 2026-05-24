@@ -24,7 +24,6 @@
   flex: 1;
   color: var(--foreground);
   animation: pageEnter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: opacity, transform;
 }
 
 @media (max-width: 768px) {

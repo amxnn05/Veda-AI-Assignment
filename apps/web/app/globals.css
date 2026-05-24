@@ -41,6 +41,11 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
 body {
   background:
     radial-gradient(circle at top right, rgba(111, 114, 185, 0.1), transparent 32%),
@@ -53,6 +58,8 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
