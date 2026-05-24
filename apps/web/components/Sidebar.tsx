@@ -14,12 +14,14 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
+import { useUserStore } from '@/store/userStore';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
 
 export const Sidebar = () => {
   const pathname = usePathname();
   const { assignments } = useAssignmentStore();
+  const { user } = useUserStore();
 
   const navItems = [
     { icon: Home, label: 'Home', href: '/' },
@@ -70,11 +72,11 @@ export const Sidebar = () => {
 
         <div className={styles.profileCard}>
           <div className={styles.avatar}>
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=School" alt="School Logo" />
+            <img src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=School"} alt="School Logo" />
           </div>
           <div className={styles.profileInfo}>
-            <p className={styles.schoolName}>Delhi Public School</p>
-            <p className={styles.schoolLocation}>Bokaro Steel City</p>
+            <p className={styles.schoolName}>{user?.schoolName || 'Delhi Public School'}</p>
+            <p className={styles.schoolLocation}>{user?.location || 'Bokaro Steel City'}</p>
           </div>
         </div>
       </div>

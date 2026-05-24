@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Upload, 
   X, 
@@ -15,7 +15,9 @@ import {
 import styles from './CreateAssignment.module.css';
 import { useRouter } from 'next/navigation';
 import { useAssignmentStore, QuestionType } from '@/store/assignmentStore';
+import { useUserStore } from '@/store/userStore';
 import { v4 as uuid } from 'uuid';
+import { clsx } from 'clsx';
 
 const QUESTION_TYPES = [
   'Multiple Choice Questions',
@@ -29,11 +31,22 @@ const QUESTION_TYPES = [
 export default function CreateAssignmentPage() {
   const router = useRouter();
   const { addAssignment } = useAssignmentStore();
+  const { user } = useUserStore();
   
-  const [subject, setSubject] = useState('Science'); 
+  const [subject, setSubject] = useState(''); 
+  const [schoolName, setSchoolName] = useState('');
+  const [className, setClassName] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [instructions, setInstructions] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    if (user?.schoolName) {
+      setSchoolName(user.schoolName);
+    }
+  }, [user]);
+
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([
     { id: uuid(), type: 'Multiple Choice Questions', count: 4, marks: 1 },
     { id: uuid(), type: 'Short Questions', count: 3, marks: 2 },
@@ -63,10 +76,28 @@ export default function CreateAssignmentPage() {
   const totalMarks = questionTypes.reduce((acc, q) => acc + ((q.count || 0) * (q.marks || 0)), 0);
 
   const handleSubmit = async () => {
+    // Validation
+    const newErrors: Record<string, boolean> = {
+      subject: !subject.trim(),
+      schoolName: !schoolName.trim(),
+      className: !className.trim(),
+      dueDate: !dueDate,
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(Boolean)) {
+      return;
+    }
+
     const formData = new FormData();
     formData.append('subject', subject);
+    formData.append('schoolName', schoolName);
+    formData.append('className', className);
+    formData.append('location', user?.location || '');
     formData.append('instructions', instructions);
     formData.append('dueDate', dueDate);
+    formData.append('questionTypes', JSON.stringify(questionTypes));
     if (file) {
       formData.append('file', file);
     }
@@ -132,15 +163,49 @@ export default function CreateAssignmentPage() {
         </div>
 
         <div className={styles.inputGroup}>
+          <label className={styles.label}>School Name</label>
+          <input 
+            type="text" 
+            placeholder="e.g. Delhi Public School..." 
+            className={clsx(styles.input, errors.schoolName && styles.errorInput)}
+            value={schoolName}
+            onChange={(e) => {
+              setSchoolName(e.target.value);
+              if (errors.schoolName) setErrors({ ...errors, schoolName: false });
+            }}
+          />
+          {errors.schoolName && <span className={styles.errorText}>School name is required</span>}
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Class</label>
+          <input 
+            type="text" 
+            placeholder="e.g. 5th, 8th..." 
+            className={clsx(styles.input, errors.className && styles.errorInput)}
+            value={className}
+            onChange={(e) => {
+              setClassName(e.target.value);
+              if (errors.className) setErrors({ ...errors, className: false });
+            }}
+          />
+          {errors.className && <span className={styles.errorText}>Class is required</span>}
+        </div>
+
+        <div className={styles.inputGroup}>
           <label className={styles.label}>Subject</label>
           <input 
             type="text" 
             placeholder="e.g. Science, Mathematics..." 
-            className={styles.input}
+            className={clsx(styles.input, errors.subject && styles.errorInput)}
             value={subject}
-            onChange={(e) => setSubject(e.target.value)}
+            onChange={(e) => {
+              setSubject(e.target.value);
+              if (errors.subject) setErrors({ ...errors, subject: false });
+            }}
             required
           />
+          {errors.subject && <span className={styles.errorText}>Subject is required</span>}
         </div>
 
         <div className={styles.inputGroup}>
@@ -148,11 +213,15 @@ export default function CreateAssignmentPage() {
           <div className={styles.dateInputWrapper}>
             <input 
               type="date" 
-              className={styles.input}
+              className={clsx(styles.input, errors.dueDate && styles.errorInput)}
               value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+              onChange={(e) => {
+                setDueDate(e.target.value);
+                if (errors.dueDate) setErrors({ ...errors, dueDate: false });
+              }}
             />
           </div>
+          {errors.dueDate && <span className={styles.errorText}>Due date is required</span>}
         </div>
 
         <div className={styles.questionTypesSection}>

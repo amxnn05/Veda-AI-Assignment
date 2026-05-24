@@ -31,6 +31,28 @@ const assignmentSchema = new mongoose.Schema(
         fileType: {
             type: String
         },
+        schoolName: {
+            type: String
+        },
+        className: {
+            type: String
+        },
+        location: {
+            type: String
+        },
+        questionTypes: [
+            {
+                type: { type: String },
+                count: { type: Number },
+                marks: { type: Number }
+            }
+        ],
+        totalQuestions: {
+            type: Number
+        },
+        totalMarks: {
+            type: Number
+        },
 
     },
     {

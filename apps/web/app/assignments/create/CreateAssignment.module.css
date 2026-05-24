@@ -154,6 +154,19 @@
   border-color: #ADB5BD;
 }
 
+.errorInput {
+  border-color: #E03131 !important;
+  background-color: #FFF5F5;
+}
+
+.errorText {
+  color: #E03131;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  display: block;
+}
+
 .dateIcon {
   position: absolute;
   right: 16px;

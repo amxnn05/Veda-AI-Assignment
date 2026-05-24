@@ -20,6 +20,9 @@ export interface Assignment {
   generatedPaper?: any;
   fileContent?: string;
   fileType?: string;
+  schoolName?: string;
+  className?: string;
+  location?: string;
 }
 
 interface AssignmentState {
@@ -32,6 +35,8 @@ interface AssignmentState {
   fetchAssignments: () => Promise<void>;
   fetchAssignmentById: (id: string) => Promise<Assignment | null>;
   regenerateQuestion: (assignmentId: string, questionId: string) => Promise<boolean>;
+  regenerateFullAssignment: (id: string, instructions?: string) => Promise<boolean>;
+  deleteAssignment: (id: string) => Promise<boolean>;
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -121,6 +126,46 @@ export const useAssignmentStore = create<AssignmentState>((set, get) => ({
       return false;
     } catch (err) {
       console.error('Regeneration failed:', err);
+      return false;
+    }
+  },
+  regenerateFullAssignment: async (id: string, instructions?: string) => {
+    try {
+      const response = await fetch(`${API_URL}/api/assignments/${id}/regenerate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instructions }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        set((state) => ({
+          assignments: state.assignments.map((a) => 
+            a.id === id ? { ...a, status: 'processing', generatedPaper: undefined } : a
+          ),
+        }));
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error('Full regeneration failed:', err);
+      return false;
+    }
+  },
+  deleteAssignment: async (id: string) => {
+    try {
+      const response = await fetch(`${API_URL}/api/assignments/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if (data.success) {
+        set((state) => ({
+          assignments: state.assignments.filter((a) => a.id !== id),
+        }));
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error('Failed to delete assignment:', err);
       return false;
     }
   },

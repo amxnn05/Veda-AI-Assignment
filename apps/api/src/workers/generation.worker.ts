@@ -45,9 +45,10 @@ new Worker(
 
             const prompt =
                 buildPrompt(
-                    assignment.subject,
+                    assignment.subject || "",
                     assignment.instructions || "",
-                    assignment.fileContent
+                    assignment.questionTypes,
+                    assignment.fileContent || undefined
                 );
 
 

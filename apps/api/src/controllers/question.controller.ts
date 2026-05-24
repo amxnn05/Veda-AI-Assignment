@@ -71,26 +71,28 @@ export const regenerateQuestion =
                     });
             }
 
+            const isMCQ = 
+                (targetSection.instruction && targetSection.instruction.toLowerCase().includes("multiple choice")) || 
+                (targetSection.title && targetSection.title.toLowerCase().includes("multiple choice")) ||
+                (targetQuestion.options && targetQuestion.options.length > 0);
+
             const prompt = `
-Generate ONE new question.
+Generate ONE new question based on the following section context:
+Section: ${targetSection.title}
+Instruction: ${targetSection.instruction}
 
 Return ONLY valid JSON.
 
-Difficulty:
-${targetQuestion.difficulty}
-
-Marks:
-${targetQuestion.marks}
-
-Subject:
-${assignment.subject}
+Difficulty: ${targetQuestion.difficulty}
+Marks: ${targetQuestion.marks}
+Subject: ${assignment.subject}
+${isMCQ ? "This is a Multiple Choice Question. You MUST provide exactly 4 options in an 'options' array." : ""}
 
 Format:
-
 {
   "question": "",
-  "difficulty": "easy",
-  "marks": 2
+  "difficulty": "${targetQuestion.difficulty}",
+  "marks": ${targetQuestion.marks}${isMCQ ? ',\n  "options": ["", "", "", ""],\n  "answer": ""' : ""}
 }
 `;
 
@@ -118,14 +120,11 @@ Format:
 
             const updatedQuestion = {
                 id: uuid(),
-
-                question:
-                    parsed.question,
-
-                difficulty:
-                    parsed.difficulty,
-
-                marks: parsed.marks
+                question: parsed.question,
+                difficulty: parsed.difficulty || targetQuestion.difficulty,
+                marks: parsed.marks || targetQuestion.marks,
+                ...(parsed.options ? { options: parsed.options } : {}),
+                ...(parsed.answer ? { answer: parsed.answer } : {})
             };
 
 
