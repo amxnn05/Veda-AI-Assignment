@@ -13,6 +13,7 @@
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow-soft);
+  animation: pageEnter 240ms ease both;
 }
 
 .logoContainer {
@@ -21,6 +22,7 @@
   gap: 12px;
   margin-bottom: 32px;
   padding: 0 8px;
+  animation: elementReveal 300ms cubic-bezier(0.22, 1, 0.36, 1) 40ms both;
 }
 
 .logo {
@@ -62,6 +64,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
   transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  animation: elementReveal 320ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
 }
 
 .createButton:hover {
@@ -85,11 +88,19 @@
   font-weight: 540;
   font-size: 14px;
   transition: all 0.2s;
+  animation: listItemReveal 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.navItem:nth-child(1) { animation-delay: 120ms; }
+.navItem:nth-child(2) { animation-delay: 150ms; }
+.navItem:nth-child(3) { animation-delay: 180ms; }
+.navItem:nth-child(4) { animation-delay: 210ms; }
+.navItem:nth-child(5) { animation-delay: 240ms; }
 
 .navItem:hover {
   background-color: var(--surface-soft);
   color: var(--foreground);
+  transform: translateX(2px);
 }
 
 .active {

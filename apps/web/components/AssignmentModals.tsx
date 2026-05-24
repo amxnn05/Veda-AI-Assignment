@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { AlertTriangle, ArrowRight, BarChart3, Brain, CheckCircle2, Loader2, PieChart, RefreshCw, Sparkles, X } from 'lucide-react';
+import { ArrowRight, BarChart3, CheckCircle2, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
 import styles from '../app/assignments/[id]/AssignmentOutput.module.css';
 
 type StudentDifficultyInsights = {
@@ -139,9 +139,6 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
         <div className={styles.analysisGrid}>
           <div className={styles.analysisHero}>
             <div>
-              <span className={styles.analysisHeroIcon}><Sparkles size={18} /></span>
-            </div>
-            <div>
               <label>Main Focus</label>
               <p>{analysis.mainFocus || 'No focus summary is available yet.'}</p>
             </div>
@@ -149,9 +146,7 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
 
           <div className={styles.coverageMeter}>
             <div className={styles.coverageHeader}>
-              <span className={styles.coverageIcon}><PieChart size={19} /></span>
               <div>
-                <p className={styles.modalEyebrow}>AI Syllabus Coverage Meter</p>
                 <h3>Topic Balance</h3>
               </div>
             </div>
@@ -205,9 +200,7 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
 
           <div className={styles.predictorPanel}>
             <div className={styles.predictorHeader}>
-              <span className={styles.predictorIcon}><Brain size={20} /></span>
               <div>
-                <p className={styles.modalEyebrow}>AI Exam Weakness Predictor</p>
                 <h3>Student Performance Insights</h3>
               </div>
               <span className={styles.difficultyPill}>{difficultyInsights.estimatedDifficulty || 'Not estimated'}</span>
@@ -215,7 +208,7 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
 
             <div className={styles.predictorGrid}>
               <div className={styles.predictorCard}>
-                <label><AlertTriangle size={15} /> High Risk Areas</label>
+                <label>High Risk Areas</label>
                 <div className={styles.tagCloud}>
                   {difficultyInsights.highRiskTopics?.length
                     ? difficultyInsights.highRiskTopics.map((topic) => <span key={topic} className={`${styles.tag} ${styles.riskTag}`}>{topic}</span>)

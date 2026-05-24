@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { Loader2, MoreVertical, Trash2, X } from 'lucide-react';
 import styles from './AssignmentCard.module.css';
 import { Assignment, useAssignmentStore } from '../store/assignmentStore';
 import { format } from 'date-fns';
@@ -11,6 +12,9 @@ interface AssignmentCardProps {
 
 export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isVanishing, setIsVanishing] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const { deleteAssignment } = useAssignmentStore();
@@ -38,10 +42,23 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (confirm('Are you sure you want to delete this assignment?')) {
-      await deleteAssignment(assignment.id);
-    }
     setShowDropdown(false);
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDelete = async () => {
+    setIsDeleting(true);
+    setIsVanishing(true);
+
+    window.setTimeout(async () => {
+      const deleted = await deleteAssignment(assignment.id);
+
+      if (!deleted) {
+        setIsVanishing(false);
+        setIsDeleting(false);
+        setShowDeleteDialog(false);
+      }
+    }, 220);
   };
 
   const handleView = (e: React.MouseEvent) => {
@@ -57,37 +74,74 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
   };
 
   return (
-    <div className={styles.card} onClick={() => router.push(`/assignments/${assignment.id}`)}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>{assignment.subject}</h3>
-        <div className={styles.dropdownContainer} ref={dropdownRef}>
-          <button className={styles.moreButton} onClick={toggleDropdown}>
-            <MoreVertical size={18} />
-          </button>
+    <>
+      <div className={`${styles.card} ${isVanishing ? styles.vanish : ''}`} onClick={() => router.push(`/assignments/${assignment.id}`)}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>{assignment.subject}</h3>
+          <div className={styles.dropdownContainer} ref={dropdownRef}>
+            <button className={styles.moreButton} onClick={toggleDropdown}>
+              <MoreVertical size={18} />
+            </button>
 
-          {showDropdown && (
-            <div className={styles.dropdown}>
-              <button className={styles.dropdownItem} onClick={handleView}>
-                View Assignment
+            {showDropdown && (
+              <div className={styles.dropdown}>
+                <button className={styles.dropdownItem} onClick={handleView}>
+                  View Assignment
+                </button>
+                <button className={`${styles.dropdownItem} ${styles.deleteItem}`} onClick={handleDelete}>
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.footer}>
+          <div className={styles.info}>
+            <span className={styles.label}>Assigned on :</span>
+            <span className={styles.value}>{safeDateFormat(assignment.createdAt)}</span>
+          </div>
+          <div className={styles.info}>
+            <span className={styles.label}>Due :</span>
+            <span className={styles.value}>{safeDateFormat(assignment.dueDate)}</span>
+          </div>
+        </div>
+      </div>
+
+      {showDeleteDialog && createPortal(
+        <div className={styles.deleteOverlay} onClick={() => !isDeleting && setShowDeleteDialog(false)}>
+          <div className={styles.deleteDialog} onClick={(e) => e.stopPropagation()}>
+            <button
+              className={styles.dialogClose}
+              onClick={() => setShowDeleteDialog(false)}
+              disabled={isDeleting}
+            >
+              <X size={18} />
+            </button>
+
+            <div className={styles.deleteIcon}>
+              <Trash2 size={20} />
+            </div>
+            <p className={styles.dialogKicker}>Delete assignment</p>
+            <h3>Remove this paper?</h3>
+            <p className={styles.dialogCopy}>
+              <span className={styles.assignmentName}>{assignment.subject}</span>
+              will be removed from your assignment list. You won&apos;t be able to recover it after deleting.
+            </p>
+
+            <div className={styles.dialogActions}>
+              <button className={styles.cancelDeleteBtn} onClick={() => setShowDeleteDialog(false)} disabled={isDeleting}>
+                Keep it
               </button>
-              <button className={`${styles.dropdownItem} ${styles.deleteItem}`} onClick={handleDelete}>
-                Delete
+              <button className={styles.confirmDeleteBtn} onClick={confirmDelete} disabled={isDeleting}>
+                {isDeleting ? <Loader2 size={16} className={styles.spinner} /> : <Trash2 size={16} />}
+                <span>{isDeleting ? 'Deleting...' : 'Delete'}</span>
               </button>
             </div>
-          )}
-        </div>
-      </div>
-
-      <div className={styles.footer}>
-        <div className={styles.info}>
-          <span className={styles.label}>Assigned on :</span>
-          <span className={styles.value}>{safeDateFormat(assignment.createdAt)}</span>
-        </div>
-        <div className={styles.info}>
-          <span className={styles.label}>Due :</span>
-          <span className={styles.value}>{safeDateFormat(assignment.dueDate)}</span>
-        </div>
-      </div>
-    </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 };

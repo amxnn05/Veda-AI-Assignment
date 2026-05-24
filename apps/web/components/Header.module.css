@@ -18,6 +18,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  animation: elementReveal 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .backButton {
@@ -62,6 +63,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  animation: elementReveal 280ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
 }
 
 .iconButton {

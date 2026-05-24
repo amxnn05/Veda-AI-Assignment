@@ -9,6 +9,7 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 24px;
+  animation: pageContentSettle 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .statusDot {
@@ -54,6 +55,7 @@
   padding: 32px;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-soft);
+  animation: pageContentSettle 320ms cubic-bezier(0.22, 1, 0.36, 1) 40ms both;
 }
 
 .sectionTitle {
@@ -71,6 +73,7 @@
 
 .uploadArea {
   margin-bottom: 32px;
+  animation: elementReveal 320ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
 }
 
 .uploadBox {
@@ -184,7 +187,14 @@
 
 .inputGroup {
   margin-bottom: 24px;
+  animation: elementReveal 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.inputGroup:nth-of-type(1) { animation-delay: 120ms; }
+.inputGroup:nth-of-type(2) { animation-delay: 150ms; }
+.inputGroup:nth-of-type(3) { animation-delay: 180ms; }
+.inputGroup:nth-of-type(4) { animation-delay: 210ms; }
+.inputGroup:nth-of-type(5) { animation-delay: 240ms; }
 
 .label {
   display: block;
@@ -280,6 +290,7 @@
 
 .questionTypesSection {
   margin-bottom: 24px;
+  animation: elementReveal 320ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
 }
 
 .questionTypesHeader {
@@ -302,7 +313,14 @@
   gap: 16px;
   margin-bottom: 16px;
   align-items: center;
+  animation: listItemReveal 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.questionTypeRow:nth-child(2) { animation-delay: 300ms; }
+.questionTypeRow:nth-child(3) { animation-delay: 330ms; }
+.questionTypeRow:nth-child(4) { animation-delay: 360ms; }
+.questionTypeRow:nth-child(5) { animation-delay: 390ms; }
+.questionTypeRow:nth-child(n + 6) { animation-delay: 420ms; }
 
 .selectWrapper {
   position: relative;
@@ -405,6 +423,7 @@
 
 .additionalInfo {
   margin-top: 32px;
+  animation: elementReveal 320ms cubic-bezier(0.22, 1, 0.36, 1) 320ms both;
 }
 
 .textareaWrapper {
@@ -467,6 +486,7 @@
   justify-content: space-between;
   padding: 0 40px;
   z-index: 50;
+  animation: pageContentSettle 280ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
 }
 
 .prevButton {
