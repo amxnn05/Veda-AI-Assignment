@@ -692,9 +692,9 @@
 /* Paper Perfect Styles - Optimized for PDF Export */
 .paperCard {
   background-color: white;
-  border-radius: 0;
+  border-radius: 18px;
   padding: 80px 60px;
-  box-shadow: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
   border: 1px solid #DEE2E6;
   width: 100%;
   font-family: var(--font-sans);
@@ -1185,7 +1185,11 @@
   }
 
   .qRegenerate {
-    display: none;
+    display: inline-flex;
+    padding: 6px;
+    margin-left: 4px;
+    opacity: 1;
+    visibility: visible;
   }
 
   .optionsGrid {
