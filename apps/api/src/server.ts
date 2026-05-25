@@ -19,15 +19,20 @@ const allowedOrigins = [
     "http://localhost:5173",
 ].filter(Boolean) as string[];
 
+console.log("Allowed Origins:", allowedOrigins.length > 0 ? allowedOrigins : "ALL (*)");
+
 const io = new Server(httpServer, {
     cors: {
         origin: allowedOrigins.length > 0 ? allowedOrigins : "*",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        credentials: true
     }
 });
 
 app.use(cors({
-    origin: allowedOrigins.length > 0 ? allowedOrigins : "*"
+    origin: allowedOrigins.length > 0 ? allowedOrigins : "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
 }));
 app.use(express.json());
 
