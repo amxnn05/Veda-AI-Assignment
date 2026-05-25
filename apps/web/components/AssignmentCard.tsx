@@ -75,7 +75,10 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
 
   return (
     <>
-      <div className={`${styles.card} ${isVanishing ? styles.vanish : ''}`} onClick={() => router.push(`/assignments/${assignment.id}`)}>
+      <div 
+        className={`${styles.card} ${isVanishing ? styles.vanish : ''} ${showDropdown ? styles.cardActive : ''}`} 
+        onClick={() => router.push(`/assignments/${assignment.id}`)}
+      >
         <div className={styles.header}>
           <h3 className={styles.title}>{assignment.subject}</h3>
           <div className={styles.dropdownContainer} ref={dropdownRef}>
@@ -84,7 +87,7 @@ export const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
             </button>
 
             {showDropdown && (
-              <div className={styles.dropdown}>
+              <div className={styles.dropdown} onClick={(e) => e.stopPropagation()}>
                 <button className={styles.dropdownItem} onClick={handleView}>
                   View Assignment
                 </button>
