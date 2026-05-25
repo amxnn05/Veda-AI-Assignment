@@ -1,15 +1,13 @@
 {
   "name": "api",
-  "module": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run src/index.ts",
+    "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
     "worker": "tsx watch src/workers/generation.worker.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
     "@types/socket.io": "^3.0.2",
@@ -18,7 +16,7 @@
     "tsx": "^4.22.3"
   },
   "peerDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "5.9.2"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

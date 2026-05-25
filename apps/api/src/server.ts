@@ -33,6 +33,15 @@ app.use(
     questionRoutes
 );
 
+app.get(
+    "/health",
+    (_, res) => {
+        res.json({
+            success: true
+        });
+    }
+);
+
 app.use(
     (
         error: Error,
