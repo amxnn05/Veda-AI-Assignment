@@ -11,7 +11,7 @@
 
 
 ## Workflow
-
+![alt text](image.png)
 1. Teacher creates a new assignment.
 2. Teacher enters school, class, subject, due date, paper duration, and question type requirements.
 3. Teacher may upload a PDF or image as source material.
