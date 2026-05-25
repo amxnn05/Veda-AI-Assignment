@@ -410,8 +410,8 @@ This project is a Turborepo monorepo with:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd VedaAi
+git clone https://github.com/amxnn05/Veda-AI-Assignment.git
+cd Veda-AI-Assignment
 ```
 
 ### 2. Install Dependencies
