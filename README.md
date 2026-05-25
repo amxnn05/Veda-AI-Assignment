@@ -30,6 +30,22 @@ I have added :
 - **Clean printable PDF export**
 - **Smooth teacher-focused UX**
 
+## Per-Question Regeneration Feature
+The Per-Question Regeneration feature allows teachers to regenerate a single question from an already generated assessment without recreating the entire question paper.
+
+This improves:
+
+Flexibility
+AI control
+User experience
+Paper customization
+
+Instead of regenerating the full paper, only the selected question is replaced while preserving:
+
+Section structure
+Marks distribution
+Difficulty balance
+Overall paper format
 ## Adaptive Regeneration
   
   The analysis popup includes actions that allow the teacher to regenerate the paper intelligently.
