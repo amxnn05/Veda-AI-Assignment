@@ -1,6 +1,5 @@
 {
-  "name": "VedaAi",
-  "version": "1.0.0",
+  "name": "veda-ai",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -10,18 +9,17 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
-    "express": "^5.2.1",
-    "prettier": "^3.7.4",
-    "turbo": "^2.9.14",
-    "typescript": "5.9.2"
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   },
-  "packageManager": "npm@10.9.2",
   "workspaces": [
-    "apps/*",
+    "apps/api",
+    "apps/web",
     "packages/*"
-  ]
+  ],
+  "packageManager": "npm@11.13.0"
 }
