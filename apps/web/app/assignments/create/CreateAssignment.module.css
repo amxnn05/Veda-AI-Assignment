@@ -21,7 +21,7 @@
 
 .header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   margin-bottom: 24px;
   animation: pageContentSettle 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -32,12 +32,11 @@
 }
 
 .statusDot {
-  width: 10px;
-  height: 10px;
-  background-color: #28A745;
+  width: 12px;
+  height: 12px;
+  background-color: #31C48D;
   border-radius: 50%;
-  margin-top: 8px;
-  box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2);
+  box-shadow: 0 0 0 4px rgba(49, 196, 141, 0.2);
 }
 
 .title {
@@ -54,29 +53,28 @@
 
 .progressBar {
   width: 100%;
-  max-width: 800px;
-  height: 4px;
-  background-color: color-mix(in srgb, var(--surface-soft) 65%, transparent);
-  border-radius: 2px;
-  margin-bottom: 32px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  max-width: 600px;
+  height: 3px;
+  margin: 0 auto 36px;
+  display: flex;
+  gap: 8px;
 }
 
-.progressFill {
+.stepSegment {
+  flex: 1;
   height: 100%;
-  background: linear-gradient(90deg, var(--foreground), rgba(249, 115, 22, 0.74));
-  transition: width 0.3s ease;
+  background-color: var(--surface-soft);
+  border-radius: 99px;
+}
+
+.stepActive {
+  background-color: var(--foreground);
 }
 
 .formCard {
   max-width: 800px;
   margin: 0 auto;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
-    color-mix(in srgb, var(--card-bg) 82%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 78%, transparent);
   backdrop-filter: blur(24px) saturate(1.08);
   border-radius: 24px;
   padding: 32px;
@@ -213,9 +211,9 @@
 }
 
 .clearFileBtn:hover {
-  color: #E03131;
-  border-color: #FFC9C9;
-  background-color: #FFF5F5;
+  color: var(--danger);
+  border-color: var(--danger-border);
+  background-color: var(--danger-bg);
 }
 
 .inputGroup {
@@ -266,12 +264,12 @@
 }
 
 .errorInput {
-  border-color: #E03131 !important;
-  background-color: #FFF5F5;
+  border-color: var(--danger) !important;
+  background-color: var(--danger-bg);
 }
 
 .errorText {
-  color: #E03131;
+  color: var(--danger);
   font-size: 12px;
   font-weight: 500;
   margin-top: 4px;
@@ -498,7 +496,7 @@
   width: 32px;
   height: 32px;
   background-color: var(--foreground);
-  color: white;
+  color: var(--background);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -507,7 +505,7 @@
 }
 
 .micButton:hover {
-  background-color: #333;
+  background-color: var(--primary-hover);
 }
 
 .footerActions {
@@ -624,7 +622,7 @@
     justify-content: center;
     color: var(--foreground);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.26);
+    background: var(--surface-soft);
   }
 
   .statusDot,

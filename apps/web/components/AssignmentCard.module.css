@@ -106,13 +106,13 @@
 }
 
 .deleteItem {
-  color: #E03131;
+  color: var(--danger);
   background-color: transparent;
   margin-top: 2px;
 }
 
 .deleteItem:hover {
-  background-color: rgba(224, 49, 49, 0.08);
+  background-color: var(--danger-bg);
 }
 
 .footer {
@@ -240,7 +240,7 @@
 }
 
 .confirmDeleteBtn {
-  color: white;
+  color: #FFFFFF;
   background: #D94848;
 }
 
@@ -311,7 +311,7 @@
     border-radius: 14px;
     padding: 18px 16px;
     gap: 24px;
-    background-color: color-mix(in srgb, var(--card-bg) 94%, white 4%);
+    background-color: color-mix(in srgb, var(--card-bg) 94%, var(--foreground) 4%);
     backdrop-filter: none;
     box-shadow: none;
   }

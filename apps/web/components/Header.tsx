@@ -5,7 +5,7 @@ import {
   ArrowLeft, 
   Bell, 
   ChevronDown,
-  LayoutGrid,
+  Sparkles,
   Menu
 } from 'lucide-react';
 import styles from './Header.module.css';
@@ -36,7 +36,7 @@ export const Header = ({ title = 'Assignment', showBack = true, compactSidebar =
           </button>
         )}
         <div className={styles.breadcrumbs}>
-          <LayoutGrid size={16} className={styles.breadcrumbIcon} />
+          <Sparkles size={18} className={styles.breadcrumbIcon} />
           <span className={styles.breadcrumbText}>{title}</span>
         </div>
       </div>

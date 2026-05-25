@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { ReactLenis, useLenis } from 'lenis/react';
 import { ArrowRight, BarChart3, CheckCircle2, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
 import styles from '../app/assignments/[id]/AssignmentOutput.module.css';
 
@@ -59,8 +60,10 @@ const Modal = ({ isOpen, onClose, title, eyebrow, icon, children }: ModalProps) 
             <X size={20} />
           </button>
         </div>
-        <div className={styles.modalBody}>
-          {children}
+        <div className={styles.modalScrollArea} data-lenis-prevent>
+          <div className={styles.modalBody}>
+            {children}
+          </div>
         </div>
       </div>
     </div>,

@@ -92,7 +92,7 @@ export default function AssignmentOutputPage() {
   if (!assignment) {
     return (
       <div className={styles.loadingContainer}>
-        <Loader2 className={styles.spinner} size={48} />
+        <Loader2 className={styles.spinning} size={48} />
         <p>Loading assignment...</p>
       </div>
     );
@@ -101,9 +101,7 @@ export default function AssignmentOutputPage() {
   if (assignment.status === 'pending' || assignment.status === 'processing') {
     return (
       <div className={styles.loadingContainer}>
-        <div className={styles.aiAvatar}>
-           <Image src="https://api.dicebear.com/7.x/bottts/svg?seed=Veda" alt="AI Avatar" width={80} height={80} className={styles.spinner} unoptimized />
-        </div>
+        <Loader2 className={styles.spinning} size={80} />
         <h2 className={styles.generatingTitle}>Generating your assignment...</h2>
         <p className={styles.generatingSub}>Our AI is crafting the perfect questions for you.</p>
         <div className={styles.progressContainer}>
@@ -141,9 +139,6 @@ export default function AssignmentOutputPage() {
     <div className={styles.container}>
       <div className={styles.aiHeader} data-html2canvas-ignore>
         <div className={styles.aiProfile}>
-          <div className={styles.aiAvatar}>
-            <Image src="https://api.dicebear.com/7.x/bottts/svg?seed=Veda" alt="AI Avatar" width={54} height={54} unoptimized />
-          </div>
           <div className={styles.aiMessage}>
             <p>Certainly, Lakshya! Here is the customized Question Paper for your class:</p>
             <div className={styles.aiActions}>
@@ -218,7 +213,7 @@ export default function AssignmentOutputPage() {
                         data-html2canvas-ignore
                       >
                         {regeneratingId === q.id ? (
-                          <Loader2 size={14} className={styles.spinner} />
+                          <Loader2 size={14} className={styles.spinning} />
                         ) : (
                           <RefreshCw size={14} />
                         )}

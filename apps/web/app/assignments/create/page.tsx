@@ -183,7 +183,9 @@ export default function CreateAssignmentPage() {
       </div>
 
       <div className={styles.progressBar}>
-        <div className={styles.progressFill} style={{ width: '40%' }} />
+        <div className={clsx(styles.stepSegment, styles.stepActive)} />
+        <div className={styles.stepSegment} />
+        <div className={styles.stepSegment} />
       </div>
 
       <div className={styles.formCard}>
