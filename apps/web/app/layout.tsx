@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { MainLayout } from "@/components/MainLayout";
 
-const bricolageGrotesque = Bricolage_Grotesque({
-  subsets: ["latin"],
+const bricolageGrotesque = localFont({
+  src: "./fonts/BricolageGrotesque.woff2",
   variable: "--font-bricolage",
-  display: "swap",
+  weight: "200 800",
 });
 
 export const metadata: Metadata = {
@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${bricolageGrotesque.variable} ${bricolageGrotesque.className}`}>
+    <html lang="en" className={bricolageGrotesque.variable}>
+      <body className={`${bricolageGrotesque.className} antialiased`}>
         <MainLayout>
           {children}
         </MainLayout>

@@ -16,7 +16,9 @@
   --blur-sm: blur(10px);
   --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
+  --font-geist-sans: var(--font-bricolage);
+  --font-geist-mono: var(--font-bricolage);
+  }
 
 :root[data-theme="dark"] {
   --background: #111315;
@@ -39,6 +41,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: inherit;
 }
 
 html {
@@ -51,7 +54,7 @@ body {
     radial-gradient(circle at top right, rgba(111, 114, 185, 0.1), transparent 32%),
     var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-bricolage), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 14px;
   line-height: 1.5;
   font-weight: 450;
@@ -64,7 +67,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-bricolage), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 760;
   line-height: 1.15;
 }

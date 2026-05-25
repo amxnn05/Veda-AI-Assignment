@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
     "worker": "tsx watch src/workers/generation.worker.ts"
