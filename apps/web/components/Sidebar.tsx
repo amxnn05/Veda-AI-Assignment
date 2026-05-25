@@ -33,8 +33,7 @@ export const Sidebar = ({ compact = false }: SidebarProps) => {
 
   React.useEffect(() => {
     const savedTheme = window.localStorage.getItem('veda-theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const initialTheme = savedTheme || 'light';
 
     setTheme(initialTheme);
     document.documentElement.dataset.theme = initialTheme;
