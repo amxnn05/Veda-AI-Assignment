@@ -113,8 +113,14 @@
 }
 
 .createButton:hover {
-  background-color: var(--primary-hover) !important;
-  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+  background-color: #FB923C !important;
+  color: #FFFFFF !important;
+  border-color: #FB923C !important;
+  box-shadow: 0 4px 16px rgba(251, 146, 60, 0.4);
+}
+
+.createButton:active {
+  background-color: #F97316 !important; /* slightly darker orange for click */
 }
 
 .compactSidebar .createButton {
