@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { ArrowRight, BarChart3, CheckCircle2, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
+import AnimatedButton from './ui/animated-button';
 import styles from '../app/assignments/[id]/AssignmentOutput.module.css';
 
 type StudentDifficultyInsights = {
@@ -123,14 +124,24 @@ export default function AssignmentModals({ assignment, onRegenerate }: Assignmen
 
   return (
     <>
-      <button className={styles.analysisBtn} onClick={() => setIsAnalysisOpen(true)} data-html2canvas-ignore>
+      <AnimatedButton 
+        className={styles.analysisBtn} 
+        onClick={() => setIsAnalysisOpen(true)} 
+        data-html2canvas-ignore
+        showCenterShine={false}
+      >
         <BarChart3 size={18} />
         <span>View Analysis</span>
-      </button>
-      <button className={styles.regenerateBtn} onClick={() => setIsRegenerateOpen(true)} data-html2canvas-ignore>
+      </AnimatedButton>
+      <AnimatedButton 
+        className={styles.regenerateBtn} 
+        onClick={() => setIsRegenerateOpen(true)} 
+        data-html2canvas-ignore
+        showCenterShine={false}
+      >
         <RefreshCw size={18} />
         <span>Regenerate All</span>
-      </button>
+      </AnimatedButton>
 
       <Modal 
         isOpen={isAnalysisOpen} 

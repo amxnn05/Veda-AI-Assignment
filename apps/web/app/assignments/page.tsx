@@ -84,9 +84,9 @@ export default function AssignmentsPage() {
             </button>
             <div className={styles.searchBar}>
               <Search size={18} className={styles.searchIcon} />
-              <input 
-                type="text" 
-                placeholder="Search by subject, class, status, file..." 
+              <input
+                type="text"
+                placeholder="Search by subject, class, status, file..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className={styles.searchInput}

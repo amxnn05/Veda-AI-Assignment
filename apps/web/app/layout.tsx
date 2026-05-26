@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { MainLayout } from "@/components/MainLayout";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const bricolageGrotesque = localFont({
   src: "./fonts/BricolageGrotesque.woff2",
@@ -30,10 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={bricolageGrotesque.variable} suppressHydrationWarning>
+
+    <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
+
       <body className={`${bricolageGrotesque.className} antialiased`}>
         <SmoothScroll>
           <MainLayout>

@@ -4,19 +4,20 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { 
-  Home, 
-  Users, 
-  FileText, 
-  Wand2, 
-  Library, 
-  Settings, 
+import {
+  Home,
+  Users,
+  FileText,
+  Wand2,
+  Library,
+  Settings,
   Sparkles,
   Moon,
   Sun
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
+import AnimatedButton from './ui/animated-button';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
 
@@ -70,18 +71,22 @@ export const Sidebar = ({ compact = false }: SidebarProps) => {
             <span className={styles.logoText}>VedaAI</span>
           </div>
 
-          <Link href="/assignments/create" className={styles.createButton} title="Create Assignment">
+          <AnimatedButton 
+            as={Link} 
+            href="/assignments/create" 
+            className={styles.createButton} 
+            title="Create Assignment"
+          >
             <Sparkles size={18} />
             <span>Create Assignment</span>
-          </Link>
-
+          </AnimatedButton>
           <nav className={styles.nav}>
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href === '/assignments' && pathname.startsWith('/assignments'));
               return (
-                <Link 
-                  key={item.label} 
-                  href={item.href} 
+                <Link
+                  key={item.label}
+                  href={item.href}
                   className={clsx(styles.navItem, isActive && styles.active)}
                   title={item.label}
                 >

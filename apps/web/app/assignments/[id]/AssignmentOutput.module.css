@@ -158,23 +158,23 @@
   transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
-
 .analysisBtn, .regenerateBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   min-height: 52px;
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
-  padding: 0 24px;
-  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+  padding: 0 24px !important;
+  border-radius: 20px !important;
   font-size: 15px;
   font-weight: 750;
   width: fit-content;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   cursor: pointer;
   transition: transform 180ms ease, background-color 180ms ease;
+  --shine: rgba(255, 255, 255, 0.4) !important;
 }
 
 .downloadBtn:hover {
@@ -184,7 +184,7 @@
 }
 
 .analysisBtn:hover, .regenerateBtn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.15) !important;
   transform: translateY(-2px);
 }
 
